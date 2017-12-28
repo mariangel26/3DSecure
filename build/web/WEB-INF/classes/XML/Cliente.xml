@@ -1,0 +1,22 @@
+<root>
+  <Cliente>
+    <nombreUsuario>user</nombreUsuario>
+    <contrasena>-441205016</contrasena>
+    <nombre>nombre</nombre>
+    <apellido>Reyes</apellido>
+    <correo>correo</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>pregunta</preguntaSecreta>
+    <respuestaSecreta>respuesta</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>oswalm</nombreUsuario>
+    <contrasena>1400612502</contrasena>
+    <nombre>oswaldo</nombre>
+    <apellido>Reyes</apellido>
+    <correo>oswaldo7365@hotmail.com</correo>
+    <intentos>1</intentos>
+    <preguntaSecreta>pregunta</preguntaSecreta>
+    <respuestaSecreta>respuesta</respuestaSecreta>
+  </Cliente>
+</root>
