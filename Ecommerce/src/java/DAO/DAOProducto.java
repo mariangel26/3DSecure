@@ -19,7 +19,7 @@ import org.jdom.output.XMLOutputter;
  */
 public class DAOProducto {
     private Element root;
-    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\src\\java\\XML\\Producto.xml";// mariangel
+    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\src\\java\\XML\\Producto.xml";// mariangel
     //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Producto.xml";
     
     public DAOProducto() {
@@ -37,7 +37,7 @@ public class DAOProducto {
     
     /**
      * Convierte el objeto producto a un XML
-     * @param nProducto 
+     * @param nProducto Objeto Producto
      * @return El producto convertido
      */
     private Element ProductotoXmlElement(Producto nProducto ) {
@@ -65,7 +65,7 @@ public class DAOProducto {
     
     /**
      * Convierte de XML a Objeto
-     * @param element
+     * @param element Elemento XML
      * @return El objeto producto
      * @throws ParseException 
      */
@@ -82,7 +82,7 @@ public class DAOProducto {
     
     /**
      * Registra un producto
-     * @param nProducto 
+     * @param nProducto Objeto Producto
      * @return verdadero o falso
      */
     public boolean registrarProducto(Producto nProducto) {
@@ -113,8 +113,8 @@ public class DAOProducto {
     
     /**
      * Busca el producto dado el identificador
-     * @param raiz
-     * @param id
+     * @param raiz Raiz
+     * @param id Identificador del producto
      * @return el elemento
      */
     public static Element buscar(List raiz, Integer id) {
@@ -130,7 +130,7 @@ public class DAOProducto {
     
     /**
      * Busca el producto dado el identificador
-     * @param id
+     * @param id Identificador del producto
      * @return retorna el objeto producto
      */
     public Producto buscarProducto(Integer id) {

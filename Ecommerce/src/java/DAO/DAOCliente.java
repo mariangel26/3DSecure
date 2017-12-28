@@ -17,7 +17,7 @@ import org.jdom.output.XMLOutputter;
  */
 public class DAOCliente {
     private Element root;
-    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\src\\java\\XML\\Cliente.xml";
+    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\src\\java\\XML\\Cliente.xml";
     //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Cliente.xml";
     
     public DAOCliente() {

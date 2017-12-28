@@ -53,7 +53,7 @@ public class Producto {
 
     /**
      * Establece el nombre del producto
-     * @param nombreProducto 
+     * @param nombreProducto (Nombre del producto)
      */
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
@@ -61,7 +61,7 @@ public class Producto {
 
     /**
      * Establece el precio del producto
-     * @param precioProducto 
+     * @param precioProducto (Precio del producto)
      */
     public void setPrecioProducto(String precioProducto) {
         this.precioProducto = precioProducto;
@@ -69,7 +69,7 @@ public class Producto {
 
     /**
      * Establece el identificador del producto
-     * @param idProducto 
+     * @param idProducto (Identificador del producto)
      */
     public void setIdProducto(Integer idProducto) {
         this.idProducto = idProducto;
@@ -77,7 +77,7 @@ public class Producto {
 
     /**
      * Establece la ruta de la foto del producto
-     * @param fotoProducto 
+     * @param fotoProducto (Ruta de la foto del producto)
      */
     public void setFotoProducto(String fotoProducto) {
         this.fotoProducto = fotoProducto;
