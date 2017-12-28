@@ -19,8 +19,8 @@ import org.jdom.output.XMLOutputter;
  */
 public class DAOProducto {
     private Element root;
-    //private String fileLocation = "D:\\Netbeans\\Proyectos\\ProyectoVendedor\\src\\java\\XML\\Producto.xml";// mariangel
-    private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Producto.xml";
+    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\src\\java\\XML\\Producto.xml";// mariangel
+    //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Producto.xml";
     
     public DAOProducto() {
         try {

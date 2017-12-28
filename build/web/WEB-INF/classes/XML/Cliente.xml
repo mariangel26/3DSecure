@@ -19,4 +19,14 @@
     <preguntaSecreta>pregunta</preguntaSecreta>
     <respuestaSecreta>respuesta</respuestaSecreta>
   </Cliente>
+  <Cliente>
+    <nombreUsuario>a</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>A</nombre>
+    <apellido>A</apellido>
+    <correo>A</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>A</preguntaSecreta>
+    <respuestaSecreta>A</respuestaSecreta>
+  </Cliente>
 </root>
