@@ -37,15 +37,16 @@ public class HiloProcesa extends Thread {
                //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
                //Mensaje que llega:
                 String mensaje = (String)ois.readObject();
-                System.out.println("El cliente envio: "+mensaje);
-                //enviarAeCommerce();
+                System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
+                clientSocket.close();
+                enviarAeCommerce(mensaje);
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void enviarAeCommerce(){
+    public void enviarAeCommerce(String mensaje){
         
         try {
             System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
@@ -55,7 +56,7 @@ public class HiloProcesa extends Thread {
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject("HOLA");
+            salidaObjeto.writeObject(mensaje + " HOLA HOLA SOY EL BANCO DEL VENDEDOR");
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
         }
