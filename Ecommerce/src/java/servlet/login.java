@@ -66,17 +66,21 @@ public class login extends HttpServlet {
             }else if (cliente != null && cliente.getIntentos() >= 3){
                 response.sendRedirect("index.jsp");
             }
-        }*/
-        //new HiloPrincipalServidor().start();//prueba de creacion del servidor
-        System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
+        }
+        */
+        
+        /*Este codigo se debe de pasar ala parte donde el usuario ingrese sus datos personales de banco
+        de la pagina del banco*/
+        new HiloPrincipalServidor().start();//prueba de creacion del servidor
+        /*System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             Socket client;
             client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject("HOLA");
-        
+            salidaObjeto.writeObject("HOLA SOY LA PAGINA DE ECOMMERCE");
+        */
     }
     
     private Integer toHash(String clave){

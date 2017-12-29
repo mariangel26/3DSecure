@@ -35,8 +35,8 @@ public class HiloProcesaServidor extends Thread {
                //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
                //Mensaje que llega:
                 String mensaje = (String)ois.readObject();
-                System.out.println("El cliente envio: "+mensaje);
-                
+                System.out.println("El cliente (EL BANCO DEL VENDEDOR) envio: "+mensaje);
+                clientSocket.close();
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
