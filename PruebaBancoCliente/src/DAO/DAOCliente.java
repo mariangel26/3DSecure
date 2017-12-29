@@ -19,8 +19,9 @@ import org.jdom.output.XMLOutputter;
 public class DAOCliente {
     
     private Element root;
-    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\BancoCliente\\src\\java\\XML\\Cliente.xml";
+    //private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\BancoCliente\\src\\java\\XML\\Cliente.xml";
     //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Cliente.xml";
+    private String fileLocation = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoCliente/src/XML/Cliente.xml";
     
     public DAOCliente() {
         try {
@@ -29,9 +30,11 @@ public class DAOCliente {
             doc = builder.build(fileLocation);
             root = doc.getRootElement();
         } catch (JDOMException ex) {
-            System.out.println("No se pudo iniciar la operacion por: " + ex.getMessage());
+            System.out.println("No se pudo iniciar la operacion por: " + 
+                    ex.getMessage());
         } catch (IOException ex) {
-            System.out.println("No se pudo iniciar la operacion por: " + ex.getMessage());
+            System.out.println("No se pudo iniciar la operacion por: " + 
+                    ex.getMessage());
         }
     }
     
@@ -48,6 +51,7 @@ public class DAOCliente {
         Element cedulaCliente = new Element("cedulaCliente");
         Element correoCliente = new Element("correoCliente");
         Element tarjetaCliente = new Element("tarjetaCliente");
+        Element dineroDisponible = new Element("dineroDisponible");
     
         
         nombreCliente.setText(nCliente.getNombreCliente());
@@ -55,12 +59,14 @@ public class DAOCliente {
         cedulaCliente.setText(nCliente.getCedulaCliente().toString());
         correoCliente.setText(nCliente.getCorreoCliente());
         tarjetaCliente.setText(nCliente.getTarjetaCliente().toString());
+        dineroDisponible.setText(nCliente.getDineroDisponible().toString());
         
         Clientetrans.addContent(nombreCliente);
         Clientetrans.addContent(apellidoCliente);
         Clientetrans.addContent(cedulaCliente);
         Clientetrans.addContent(correoCliente);
         Clientetrans.addContent(tarjetaCliente);
+        Clientetrans.addContent(dineroDisponible);
         
         return Clientetrans;
     }
@@ -75,9 +81,10 @@ public class DAOCliente {
        
         Cliente nCliente = new Cliente (element.getChildText("nombreCliente"),
                 element.getChildText("apellidoCliente"),
-                Long.parseLong(element.getChildText("cedulaCliente")),
+                Integer.parseInt(element.getChildText("cedulaCliente")),
                 element.getChildText("correoCliente"),
-                Long.parseLong(element.getChildText("tarjetaCliente"))           
+                Long.parseLong(element.getChildText("tarjetaCliente")),
+                Long.parseLong(element.getChildText("dineroDisponible"))
         );
         return nCliente;
     }
@@ -99,18 +106,29 @@ public class DAOCliente {
             return false;
         }
     }
-    
+    /**
+     * este metodo se debe borrar
+     * @param cliente
+     * @return 
+     */
+    public boolean registrarCliente(Cliente cliente) {
+                
+        boolean resultado = false;
+        root.addContent(ClientetoXmlElement((Cliente) cliente));
+        resultado = updateDocument();
+        return resultado;
+    }
     /**
      * Busca el producto dado la cedula
      * @param raiz Raiz
      * @param dato La cedula del cliente
      * @return el elemento
      */
-    public static Element buscar(List raiz, Long dato) {
+    public static Element buscar(List raiz, Integer dato) {
         Iterator i = raiz.iterator();
         while (i.hasNext()) {
             Element e = (Element) i.next();
-            if (dato.equals(e.getChild("cedulaCliente").getText())) {
+            if (dato.toString().equals(e.getChild("cedulaCliente").getText())) {
                 return e;
             }
         }
@@ -122,7 +140,7 @@ public class DAOCliente {
      * @param cedula Identificador del cliente
      * @return el objeto cliente
      */
-    public Cliente buscarCedula(Long cedula) {
+    public Cliente buscarCedula(Integer cedula) {
         Element aux = new Element("Cliente");
         List Cliente= this.root.getChildren("Cliente");
         while (aux != null) {
@@ -136,6 +154,25 @@ public class DAOCliente {
             }
         }
         return null;
+    }
+    /**
+     * metodo que se encarga de actualizar los datos del cliente en el banco
+     * @param nCliente
+     * @return 
+     */
+    public boolean actualizarCliente(Cliente nCliente) {
+        boolean resultado = false;
+        Element aux = new Element("Cliente");
+        List Cliente = this.root.getChildren("Cliente");
+        while (aux != null) {
+            aux = DAOCliente.buscar(Cliente,nCliente.getCedulaCliente());
+            if (aux != null) {
+                Cliente.remove(aux);
+                resultado = updateDocument();
+            }
+        }
+        registrarCliente(nCliente);
+        return resultado;
     }
     
 

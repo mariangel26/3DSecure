@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Conexion;
+package ConexionServidor;
 
 import Registro.Registro;
 import java.io.IOException;
@@ -17,15 +17,13 @@ import javax.net.ssl.SSLServerSocketFactory;
  *
  * @author oswalm
  */
-public class HiloPrincipal extends Thread{
+public class HiloPrincipalServidor extends Thread{
     
     public void run(){
-        System.out.println("Servidor empieza a correr");
+        System.out.println("VENDEDOR COMO Servidor empieza a correr");
         try {
             System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
             System.setProperty("javax.net.ssl.keyStorePassword", Registro.KEY_STORE_PASSWORD);
-            //System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE);
-            //System.setProperty("javax.net.ssl.trustStorePassword", Registro.TRUST_STORE_PASSWORD);
             
             SSLServerSocketFactory serverFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR);
@@ -33,10 +31,10 @@ public class HiloPrincipal extends Thread{
             for(;;){
                 System.out.println("Servidor esperando que alguien se conecte");
                 clientSocket = serverSocket.accept();
-                new HiloProcesa(clientSocket).start();
+                new HiloProcesaServidor(clientSocket).start();
             }
         } catch (IOException ex) {
-            Logger.getLogger(HiloPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HiloPrincipalServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

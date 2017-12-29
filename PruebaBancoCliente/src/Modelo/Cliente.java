@@ -7,18 +7,31 @@ package Modelo;
 public class Cliente {
     public String nombreCliente; //Nombre del cliente
     public String apellidoCliente; //Apellido del cliente
-    public Long cedulaCliente; //Cedula del cliente
+    public Integer cedulaCliente; //Cedula del cliente
     public String correoCliente; //Correo del cliente
     public Long tarjetaCliente; //Tarjeta de credito del cliente
+    public Long dineroDisponible; //Cantidad de dinero disponible en la cuenta del cliente
 
     public Cliente(){}
     
-    public Cliente(String nombreCliente, String apellidoCliente, Long cedulaCliente, String correoCliente, Long tarjetaCliente) {
+    public Cliente(String nombreCliente, String apellidoCliente, 
+            Integer cedulaCliente, String correoCliente, Long tarjetaCliente,
+            Long dineroDisponible) {
+        
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
         this.cedulaCliente = cedulaCliente;
         this.correoCliente = correoCliente;
         this.tarjetaCliente = tarjetaCliente;
+        this.dineroDisponible = dineroDisponible;
+    }
+
+    public Long getDineroDisponible() {
+        return dineroDisponible;
+    }
+
+    public void setDineroDisponible(Long dineroDisponible) {
+        this.dineroDisponible = dineroDisponible;
     }
 
     /**
@@ -41,7 +54,7 @@ public class Cliente {
      * Obtiene la cedula del cliente
      * @return la cedula del cliente
      */
-    public Long getCedulaCliente() {
+    public Integer getCedulaCliente() {
         return cedulaCliente;
     }
 
@@ -81,7 +94,7 @@ public class Cliente {
      * Establece la cedula del cliente
      * @param cedulaCliente (Cedula del Cliente)
      */
-    public void setCedulaCliente(Long cedulaCliente) {
+    public void setCedulaCliente(Integer cedulaCliente) {
         this.cedulaCliente = cedulaCliente;
     }
 

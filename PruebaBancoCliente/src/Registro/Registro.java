@@ -10,13 +10,15 @@ package Registro;
  * @author oswalm
  */
 public class Registro {
+    
     //DATOS PARA SOCKET
-    public static final Integer PUERTO_CONEXION = 4000;
+    public static final Integer PUERTO_CONEXION_CLIENTE = 4000;
+    public static final Integer PUERTO_CONEXION_SERVIDOR = 3000;
     public static final String IP_CONEXION = "localhost";
     //DATOS PARA SSL
-    public static final String KEY_STORE = "server.store";
+    public static final String KEY_STORE_SERVIDOR = "bancocliente.store";
     public static final String KEY_STORE_PASSWORD = "123456";
-    public static final String TRUST_STORE = "server.store";
+    public static final String TRUST_STORE_CLIENTE = "server.store";
     public static final String TRUST_STORE_PASSWORD = "123456";
     
 }
