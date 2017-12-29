@@ -5,11 +5,16 @@
  */
 package servlet;
 
+import ConexionServidor.HiloPrincipalServidor;
 import DAO.DAOCliente;
 import Modelo.Cliente;
+import Registro.Registro;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import static java.lang.System.out;
+import java.net.Socket;
+import javax.net.ssl.SSLSocketFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +39,7 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, 
             HttpServletResponse response) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
-        
+        /*
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         
@@ -61,7 +66,17 @@ public class login extends HttpServlet {
             }else if (cliente != null && cliente.getIntentos() >= 3){
                 response.sendRedirect("index.jsp");
             }
-        }
+        }*/
+        //new HiloPrincipalServidor().start();//prueba de creacion del servidor
+        System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
+            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            Socket client;
+            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
+            ObjectOutputStream salidaObjeto;      
+            //Se colocan los datos del nodo (Direccion IP y Puerto).
+            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
+            salidaObjeto.writeObject("HOLA");
+        
     }
     
     private Integer toHash(String clave){

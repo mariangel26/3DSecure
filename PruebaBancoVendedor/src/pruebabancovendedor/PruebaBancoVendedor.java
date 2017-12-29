@@ -6,9 +6,13 @@
 package pruebabancovendedor;
 
 import Conexion.HiloPrincipal;
+import Registro.Registro;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
+import java.net.Socket;
 import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -21,6 +25,7 @@ public class PruebaBancoVendedor {
      */
     public static void main(String[] args) throws IOException {
         new HiloPrincipal().start();
+        
     }
     
 }
