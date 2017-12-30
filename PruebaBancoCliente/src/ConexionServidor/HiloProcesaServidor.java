@@ -42,15 +42,17 @@ public class HiloProcesaServidor extends Thread {
                     aqui deberia RECIBIR la informacion para verificar si los datos son correctos:
                     si los datos son incorrectos se le debe responder a la pagina que son incorrectos xd
                     si son los datos correctos se envia el mensaje al servidor
+                */
                 
-                    if(verificarDatos(mensaje)){
-                        //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON CORRECTOS
-                        HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
+                    if(datosCorrectos(mensaje)){
+                        System.out.println("LOS DATOS SON CORRECTOS YAY");
+                       // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
                     }else{
                         //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
                     }   
                     
-                */
+                
+                
                 
                 /*
                     verificar si tiene el monto disponible:
@@ -94,11 +96,26 @@ public class HiloProcesaServidor extends Thread {
     /**
      * Metodo que se encarga de verificar los datos del cliente que la pagina 
      * envio al banco Cliente
-     * @params mensaje Texto que posee la informacion bancaria del cliente
+     * @param mensaje Texto que posee la informacion bancaria del cliente
      * @return true si los datos son correctos y false si hay algun error en los datos
      */
     public static Boolean datosCorrectos(String mensaje){
         Boolean correcto = true;
+        String[] split = mensaje.split(";");
+        DAOCliente dao = new DAOCliente();
+        Cliente cliente = dao.buscarCedula(Integer.parseInt(split[0]));
+        //"25253393;4532314510308244;10;21;218;oswaldo;lopez;350000"
+        if((cliente.getCedulaCliente() == Integer.parseInt(split[0])) &&
+           (cliente.getTarjetaCliente() == Long.parseLong(split[1])) &&
+           (cliente.getMesCaduciodad().equals(split[2])) &&
+           (cliente.getAnoCaduciodad().equals(split[3])) &&
+           (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) &&
+           (cliente.getNombreCliente().equals(split[5]) &&
+           (cliente.getApellidoCliente().equals(split[6])))){
+          correcto = true;
+        }else{
+          correcto = false;
+        }
         
         return correcto;
     }

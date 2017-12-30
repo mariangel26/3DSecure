@@ -78,7 +78,7 @@ h2 {
     margin: 0 0 10px 0;
     padding: 0 0 5px 0;
 }
-button {
+input {
     border: 1px solid #722A1B;
     padding: 4px 14px;
     background-color: #fff;
@@ -111,6 +111,7 @@ span {
     Producto p = new Producto();
     DAOProducto dao = new DAOProducto();
     ArrayList<Producto> producto = new ArrayList<Producto>();
+    String precio;
   %>
   
   
@@ -129,20 +130,27 @@ span {
            <div class="item">
             <img align=center border=0 src="<%=pr.getFotoProducto()%>" alt="item" />
             <h2> <%=pr.getNombreProducto()%> </h2>
-
-            <p>Precio: <em><%=pr.getPrecioProducto()%></em>
-            </p>
-            <a href="Compra.jsp">
-               <button class="add-to-cart" type="button">Comprar</button> 
-            </a>
+            <form method="POST" action="welcome">
+             
+                <p>Precio: <%=pr.getPrecioProducto()%></p>    
+             
+                <%
+                  session.setAttribute("precio", pr.getPrecioProducto());
+                %>
+                <label>
+                    <input class="add-to-cart" type="submit" value='<%= pr.getIdProducto() %> - Comprar' name='comprar'> 
+                
+                </label>
+               
+            </form>
             
             </div>
      
     <%
      }
+     
     %>
-        
-    
+
     </div>
     <!--/ items -->
 </div>
