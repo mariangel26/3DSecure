@@ -1,10 +1,13 @@
 <root>
   <Cliente>
     <nombreCliente>oswaldo</nombreCliente>
-    <apellidoCliente>Lopez</apellidoCliente>
+    <apellidoCliente>lopez</apellidoCliente>
     <cedulaCliente>25253393</cedulaCliente>
     <correoCliente>oswaldo7365@hotmail.com</correoCliente>
-    <tarjetaCliente>123456789</tarjetaCliente>
-    <dineroDisponible>100000</dineroDisponible>
+    <tarjetaCliente>4532314510308244</tarjetaCliente>
+    <dineroDisponible>1150000</dineroDisponible>
+    <mesCaduciodad>10</mesCaduciodad>
+    <anoCaduciodad>21</anoCaduciodad>
+    <codigoSeguridad>218</codigoSeguridad>
   </Cliente>
 </root>

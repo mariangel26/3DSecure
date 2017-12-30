@@ -19,9 +19,9 @@ import org.jdom.output.XMLOutputter;
 public class DAOCliente {
     
     private Element root;
-    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoCliente\\src\\XML\\Cliente.xml";
+    //private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoCliente\\src\\XML\\Cliente.xml";
     //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Cliente.xml";
-    //private String fileLocation = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoCliente/src/XML/Cliente.xml";
+    private String fileLocation = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoCliente/src/XML/Cliente.xml";
     
     public DAOCliente() {
         try {
@@ -52,7 +52,10 @@ public class DAOCliente {
         Element correoCliente = new Element("correoCliente");
         Element tarjetaCliente = new Element("tarjetaCliente");
         Element dineroDisponible = new Element("dineroDisponible");
-    
+        Element mesCaduciodad = new Element("mesCaduciodad");
+        Element anoCaduciodad = new Element("anoCaduciodad");
+        Element codigoSeguridad = new Element("codigoSeguridad");
+
         
         nombreCliente.setText(nCliente.getNombreCliente());
         apellidoCliente.setText(nCliente.getApellidoCliente());
@@ -60,6 +63,10 @@ public class DAOCliente {
         correoCliente.setText(nCliente.getCorreoCliente());
         tarjetaCliente.setText(nCliente.getTarjetaCliente().toString());
         dineroDisponible.setText(nCliente.getDineroDisponible().toString());
+        mesCaduciodad.setText(nCliente.getMesCaduciodad());
+        anoCaduciodad.setText(nCliente.getAnoCaduciodad());
+        codigoSeguridad.setText(nCliente.getCodigoSeguridad().toString());
+        
         
         Clientetrans.addContent(nombreCliente);
         Clientetrans.addContent(apellidoCliente);
@@ -67,6 +74,9 @@ public class DAOCliente {
         Clientetrans.addContent(correoCliente);
         Clientetrans.addContent(tarjetaCliente);
         Clientetrans.addContent(dineroDisponible);
+        Clientetrans.addContent(mesCaduciodad);
+        Clientetrans.addContent(anoCaduciodad);
+        Clientetrans.addContent(codigoSeguridad);
         
         return Clientetrans;
     }
@@ -84,7 +94,10 @@ public class DAOCliente {
                 Integer.parseInt(element.getChildText("cedulaCliente")),
                 element.getChildText("correoCliente"),
                 Long.parseLong(element.getChildText("tarjetaCliente")),
-                Long.parseLong(element.getChildText("dineroDisponible"))
+                Long.parseLong(element.getChildText("dineroDisponible")),
+                element.getChildText("mesCaduciodad"),
+                element.getChildText("anoCaduciodad"),
+                Integer.parseInt(element.getChildText("codigoSeguridad"))
         );
         return nCliente;
     }

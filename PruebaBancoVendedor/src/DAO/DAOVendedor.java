@@ -9,6 +9,6 @@ package DAO;
  *
  * @author oswalm
  */
-public class DAOBanco {
+public class DAOVendedor {
     
 }

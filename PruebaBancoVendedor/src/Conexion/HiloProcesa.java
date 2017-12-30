@@ -39,7 +39,7 @@ public class HiloProcesa extends Thread {
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
                 clientSocket.close();
-                HiloProcesa.enviarAeCommerce(mensaje);
+                //HiloProcesa.enviarAeCommerce(mensaje);
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);

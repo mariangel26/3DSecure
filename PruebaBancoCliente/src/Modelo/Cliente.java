@@ -11,12 +11,17 @@ public class Cliente {
     public String correoCliente; //Correo del cliente
     public Long tarjetaCliente; //Tarjeta de credito del cliente
     public Long dineroDisponible; //Cantidad de dinero disponible en la cuenta del cliente
+    public String mesCaduciodad; //mes de caducidad de la tarjeta
+    public String anoCaduciodad; //ano de caducidad de la tarjeta
+    public Integer codigoSeguridad; //codigo de seguridad de la tarjeta de credito
+    
 
     public Cliente(){}
     
     public Cliente(String nombreCliente, String apellidoCliente, 
             Integer cedulaCliente, String correoCliente, Long tarjetaCliente,
-            Long dineroDisponible) {
+            Long dineroDisponible,String mesCaduciodad,String anoCaduciodad,
+            Integer codigoSeguridad) {
         
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
@@ -24,6 +29,33 @@ public class Cliente {
         this.correoCliente = correoCliente;
         this.tarjetaCliente = tarjetaCliente;
         this.dineroDisponible = dineroDisponible;
+        this.mesCaduciodad = mesCaduciodad; 
+        this.anoCaduciodad = anoCaduciodad; 
+        this.codigoSeguridad = codigoSeguridad; 
+    }
+
+    public String getMesCaduciodad() {
+        return mesCaduciodad;
+    }
+
+    public void setMesCaduciodad(String mesCaduciodad) {
+        this.mesCaduciodad = mesCaduciodad;
+    }
+
+    public String getAnoCaduciodad() {
+        return anoCaduciodad;
+    }
+
+    public void setAnoCaduciodad(String anoCaduciodad) {
+        this.anoCaduciodad = anoCaduciodad;
+    }
+
+    public Integer getCodigoSeguridad() {
+        return codigoSeguridad;
+    }
+
+    public void setCodigoSeguridad(Integer codigoSeguridad) {
+        this.codigoSeguridad = codigoSeguridad;
     }
 
     public Long getDineroDisponible() {
