@@ -21,10 +21,16 @@ import javax.net.ssl.SSLSocketFactory;
 public class PruebaBancoCliente {
 
     public static void main(String[] args) throws IOException {
-        
-        new HiloPrincipalServidor().start();
-        
-        //HiloProcesaServidor.enviarABancoVendedor("");
+        /*String nombreCliente, String apellidoCliente, 
+            Integer cedulaCliente, String correoCliente, Long tarjetaCliente,
+            Long dineroDisponible,String mesCaduciodad,String anoCaduciodad,Integer codigoSeguridad*/
+        //new HiloPrincipalServidor().start();
+        //DAOCliente dao = new DAOCliente();
+        //Cliente cliente = new Cliente("oswaldo","lopez",25253393,"oswaldo7365@hotmail.com",4532314510308244L,400000L,"10","21",218);
+        //dao.registrarCliente(cliente);
+        //HiloProcesaServidor.enviarABancoVendedor("SI");
+        //HiloProcesaServidor.enviarABancoVendedor("NO");
+        HiloProcesaServidor.tieneDinero("");
     }
     
 }
