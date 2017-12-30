@@ -38,27 +38,29 @@ public class HiloProcesa extends Thread {
                //Mensaje que llega:
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
-                clientSocket.close();
                 enviarAeCommerce(mensaje);
-            
+                
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ESTOY AQUI POR ALGUN EXTRANO MOTIVO QUE ES POCO PROBABLE");
         }
     }
     
     public void enviarAeCommerce(String mensaje){
-        
+        System.out.println("ENTRE EN EL METODO DE ENVIAR AL ECOMMERCE");
         try {
             System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            Socket client;
-            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-            ObjectOutputStream salidaObjeto;      
-            //Se colocan los datos del nodo (Direccion IP y Puerto).
-            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject(mensaje + " HOLA HOLA SOY EL BANCO DEL VENDEDOR");
+        SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+        Socket client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
+        ObjectOutputStream salidaObjeto;      
+        //Se colocan los datos del nodo (Direccion IP y Puerto).
+        salidaObjeto = new ObjectOutputStream(client.getOutputStream());
+        //El cliente manda:
+        salidaObjeto.writeObject("NO");
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(Exception ex){
+            System.out.println("ME QUEDE PEGADO EN ESTA EXCEPCION WE");
         }
         
     }

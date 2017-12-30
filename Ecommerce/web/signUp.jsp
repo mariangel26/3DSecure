@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
+<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +12,8 @@
         
         <form action="singUp" method="post">
             <table align="center">
-                <tr>
+                <center>
+                    <tr>
                     <th align="right">Nombre:</th>
                     <td><input type="text" name="txtnombre" placeholder="Nombre"></td>
                 </tr>
@@ -38,9 +41,21 @@
                     <th align="right">Password:</th>
                     <td><input type="password" name="txtpassword" placeholder="Password"></td>
                 </tr>
-                <tr>
+                </center>
+                <center>
+                  <%
+                  ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LcNwj4UAAAAANMSYNw1JZRJrJ2hUzL3SiZWkBPd"
+                                                     ,"6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1", false);
+                  out.print(c.createRecaptchaHtml(null, null));
+                %>   
+                </center>
+                <center>
+                    <tr>
                     <td colspan="2" align="center"><input type="submit" value="Register" class=""></td>
-                </tr>
+                    </tr>
+                </center>
+                
+                
             </table>
         </form>
     </body>

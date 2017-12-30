@@ -29,4 +29,24 @@
     <preguntaSecreta>A</preguntaSecreta>
     <respuestaSecreta>A</respuestaSecreta>
   </Cliente>
+  <Cliente>
+    <nombreUsuario>m</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>mari</nombre>
+    <apellido>perez</apellido>
+    <correo>cskjsac</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>dsadassd</preguntaSecreta>
+    <respuestaSecreta>dsadsad</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>hola</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>hola</nombre>
+    <apellido>hols</apellido>
+    <correo>hols</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>hola</preguntaSecreta>
+    <respuestaSecreta>hola</respuestaSecreta>
+  </Cliente>
 </root>

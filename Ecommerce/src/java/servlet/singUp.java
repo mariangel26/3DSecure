@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 
 /**
  *
@@ -41,9 +43,19 @@ public class singUp extends HttpServlet {
         String password = request.getParameter("txtpassword");
         String pregunta = request.getParameter("txtpregunta");
         String respuesta = request.getParameter("txtrespuesta");
+        //SE VERIFICA EL CAPTCHA
+            String remoteAddr = request.getRemoteAddr();
+            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+            reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+            
+            String challenge = request.getParameter("recaptcha_challenge_field");
+            String uresponse = request.getParameter("recaptcha_response_field");
+            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+            
+ 
         if((nombre != "")&&(apellido != "")&&(correo != "")&&
                 (user != "")&&(password != "")){
-            if(verificarContrasena(password)){
+            if((verificarContrasena(password)) &&(reCaptchaResponse.isValid())){
                 Integer hash = toHash(password);
                 Cliente cliente = new Cliente (nombre,apellido,user,
                         hash.toString(),correo,0,pregunta,respuesta);

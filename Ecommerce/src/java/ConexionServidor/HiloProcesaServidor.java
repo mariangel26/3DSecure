@@ -31,6 +31,7 @@ public class HiloProcesaServidor extends Thread {
         try {
             
             //El servidor recibe:
+            System.out.println("Entre en el try");
                ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
                //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
                //Mensaje que llega:
@@ -40,6 +41,7 @@ public class HiloProcesaServidor extends Thread {
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SOY YO SOY YO, SOY LA EXCEPCION MALIGNA");
         }
     }
     

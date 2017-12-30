@@ -19,7 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 /**
  *
  * @author oswal
@@ -39,6 +40,22 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, 
             HttpServletResponse response) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
+        
+        //SE VERIFICA EL CAPTCHA
+            String remoteAddr = request.getRemoteAddr();
+            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+            reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+            
+            String challenge = request.getParameter("recaptcha_challenge_field");
+            String uresponse = request.getParameter("recaptcha_response_field");
+            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+            
+           if (reCaptchaResponse.isValid()) {
+               response.sendRedirect("welcome.jsp");
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+           
         /*
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
@@ -71,7 +88,7 @@ public class login extends HttpServlet {
         
         /*Este codigo se debe de pasar ala parte donde el usuario ingrese sus datos personales de banco
         de la pagina del banco*/
-        new HiloPrincipalServidor().start();//prueba de creacion del servidor
+        //new HiloPrincipalServidor().start();//prueba de creacion del servidor
         /*System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             Socket client;
