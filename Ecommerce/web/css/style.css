@@ -7,6 +7,17 @@ html, body {
   height: 100%;
 }
 
+#divForm{
+    overflow:scroll;
+     width:475px;
+     margin-top: auto;
+     margin-bottom: auto;
+}
+
+#div1 form {
+    width:500px;
+}
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;

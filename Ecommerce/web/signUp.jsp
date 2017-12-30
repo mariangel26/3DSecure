@@ -4,9 +4,11 @@
 
 <!DOCTYPE html>
 <html>
+    
     <title>Registrarse</title>
  <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <form class='login-form' action="singUp" method="post" onsubmit="return validar()">
+ <div id = "divForm">
+     <form class='login-form' action="singUp" method="post" onsubmit="return validar()">
 
 
   <div class="flex-row">
@@ -101,6 +103,8 @@
   
   <input class='lf--submit' type='submit' value='REGISTRARSE'>
 </form>
+ </div>
+    
 <script>     
     function validar(){
         var password = document.getElementById("txtpassword").value.toString();
