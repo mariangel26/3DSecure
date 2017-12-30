@@ -132,7 +132,10 @@ span {
 
             <p>Precio: <em><%=pr.getPrecioProducto()%></em>
             </p>
-            <button class="add-to-cart" type="button">Comprar</button>
+            <a href="Compra.jsp">
+               <button class="add-to-cart" type="button">Comprar</button> 
+            </a>
+            
             </div>
      
     <%

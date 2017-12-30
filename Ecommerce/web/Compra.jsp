@@ -4,80 +4,82 @@
 
 <!DOCTYPE html>
 <html>
-    <title>Registrarse</title>
- <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <form class='login-form' action="singUp" method="post" onsubmit="return validar()">
-
-
+    <title>Compra</title>
+       <link href="css/style.css" rel="stylesheet" type="text/css"/>
+       
+    <form class='login-form' action="" method="post">
+    <a class='lf--signup' href="signUp.jsp" type="submit" align='center'>Aqui va el precio del xml</a>
+    <div class="flex-row">
+    <label class="lf--label" for="cantidad">
+      <svg x="0px" y="0px" width="12px" height="13px">
+        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+      </svg>
+    </label>
+    <input id="cantidad" class='lf--input' placeholder='Cantidad de Productos' type='text' name="cantidad">
+  </div>
   <div class="flex-row">
-    <label class="lf--label" for="Nombre">
+    <label class="lf--label" for="nombre">
       <svg x="0px" y="0px" width="12px" height="13px">
         <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
       </svg>
     </label>
-    <input id="username" class='lf--input' placeholder='Nombre' type='text' name="txtnombre">
+    <input id="nombre" class='lf--input' placeholder='Nombre' type='text' name="nombre">
   </div>
-        
-   <div class="flex-row">
-    <label class="lf--label" for="Apellido">
-      <svg x="0px" y="0px" width="12px" height="13px">
-        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
-      </svg>
-    </label>
-    <input id="username" class='lf--input' placeholder='Apellido' type='text' name="txtapellido">
-  </div>
-        
-        
-   <div class="flex-row">
-    <label class="lf--label" for="Correo">
-      <svg x="0px" y="0px" width="12px" height="13px">
-        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
-      </svg>
-    </label>
-    <input id="username" class='lf--input' placeholder='Correo Electronico' type='text' name="txtcorreo">
-  </div>
-        
-        
-   <div class="flex-row">
-    <label class="lf--label" for="Pregunta">
-      <svg x="0px" y="0px" width="12px" height="13px">
-        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
-      </svg>
-    </label>
-    <input id="username" class='lf--input' placeholder='Pregunta Secreta' type='text' name="txtpregunta">
-  </div>
-        
-        
+  
   <div class="flex-row">
-    <label class="lf--label" for="Respuesta">
+    <label class="lf--label" for="apellido">
       <svg x="0px" y="0px" width="12px" height="13px">
         <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
       </svg>
     </label>
-    <input id="username" class='lf--input' placeholder='Respuesta Secreta' type='text' name="txtrespuesta">
+    <input id="nombre" class='lf--input' placeholder='Apellido' type='text' name="apellido">
   </div>
         
-   <div class="flex-row">
-    <label class="lf--label" for="username">
+        <div class="flex-row">
+    <label class="lf--label" for="cedula">
       <svg x="0px" y="0px" width="12px" height="13px">
         <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
       </svg>
     </label>
-    <input id="username" class='lf--input' placeholder='Username' type='text' name="txtusername">
+    <input id="cedula" class='lf--input' placeholder='Cedula de Identidad' type='text' name="cedula">
   </div>
         
-  <div class="flex-row">
-    <label class="lf--label" for="password">
-      <svg x="0px" y="0px" width="15px" height="5px">
-        <g>
-          <path fill="#B1B7C4" d="M6,2L6,2c0-1.1-1-2-2.1-2H2.1C1,0,0,0.9,0,2.1v0.8C0,4.1,1,5,2.1,5h1.7C5,5,6,4.1,6,2.9V3h5v1h1V3h1v2h1V3h1 V2H6z M5.1,2.9c0,0.7-0.6,1.2-1.3,1.2H2.1c-0.7,0-1.3-0.6-1.3-1.2V2.1c0-0.7,0.6-1.2,1.3-1.2h1.7c0.7,0,1.3,0.6,1.3,1.2V2.9z"/>
-        </g>
+        <div class="flex-row">
+    <label class="lf--label" for="tarjeta">
+      <svg x="0px" y="0px" width="12px" height="13px">
+        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
       </svg>
     </label>
-    <input id="txtpassword" class='lf--input' placeholder='Password' type='password' name="txtpassword">   
+    <input id="tarjeta" class='lf--input' placeholder='Numero de Tarjeta' type='text' name="tarjeta">
   </div>
         
-  <div>
+        <div class="flex-row">
+    <label class="lf--label" for="nSeguridad">
+      <svg x="0px" y="0px" width="12px" height="13px">
+        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+      </svg>
+    </label>
+    <input id="nSeguridad" class='lf--input' placeholder='Numeros de Seguridad' type='text' name="nseguridad">
+  </div>
+     
+        <div class="flex-row">
+    <label class="lf--label" for="Mes">
+      <svg x="0px" y="0px" width="12px" height="13px">
+        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+      </svg>
+    </label>
+    <input id="mes" class='lf--input' placeholder='Mes de Vencimiento' type='text' name="mes">
+  </div>
+          
+        <div class="flex-row">
+    <label class="lf--label" for="year">
+      <svg x="0px" y="0px" width="12px" height="13px">
+        <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+      </svg>
+    </label>
+    <input id="year" class='lf--input' placeholder='Anio de Vencimiento' type='text' name="year">
+  </div>
+     
     <center>
     <%
     ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LcNwj4UAAAAANMSYNw1JZRJrJ2hUzL3SiZWkBPd"
@@ -88,61 +90,9 @@
   <svg x="0px" y="0px" width="15px" height="5px"></svg>
   </div>
   
-  <input class='lf--submit' type='submit' value='REGISTRARSE'>
+  <input class='lf--submit' type='submit' value='INICIAR SESION'>
+  
 </form>
-<script>     
-    function validar(){
-        var password = document.getElementById("txtpassword").value.toString();
-        var respuesta = true;
-      if((password===document.getElementById("txtpassword").value)){ 
 
-          if(!poseeMayusculas(password)){
-              alert("LA CONTRASENA DEBE TENER AL MENOS 1 LETRA MAYUSCULA");
-              respuesta = false;
-          }
-          if(!poseeNoalfanumericos(password)){
-              alert("LA CONTRASENA DEBE TENER AL MENOS 1 CARACTER ALFANUMERICO");
-              respuesta = false;
-          }
-          if(!esMayorA10(password)){
-              alert("LA CONTRASENA DEBE TENER AL MENOS 10 CARACTERES");
-              respuesta = false;
-          }
-
-      }else{
-          alert("Las contrasenas son distintas!");
-          return false;
-      }
-      return respuesta;
-
-
-    }
-    var letras="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
-    function poseeMayusculas(texto){
-       for(i=0; i<texto.length; i++){
-          if (letras.indexOf(texto.charAt(i),0)!=-1){
-             return true;
-          }
-       }
-       return false;
-    }
-    var noalfanumericos="|@#~ª¨^€¬=)(!*Ç{[]}-./&%$·,+<>";
-    function poseeNoalfanumericos(texto){
-       for(i=0; i<texto.length; i++){
-          if (noalfanumericos.indexOf(texto.charAt(i),0)!=-1){
-             return true;
-          }
-       }
-       return false;
-    }
-
-    function esMayorA10(texto){
-        if(texto.length > 10){
-            return true;
-        }
-        return false;
-    }
-
-</script>
-
+    
 </html>
