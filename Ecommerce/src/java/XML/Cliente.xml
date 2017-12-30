@@ -29,4 +29,14 @@
     <preguntaSecreta>A</preguntaSecreta>
     <respuestaSecreta>A</respuestaSecreta>
   </Cliente>
+  <Cliente>
+    <nombreUsuario>asdasdad</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>asdasdas</nombre>
+    <apellido>dsad</apellido>
+    <correo>sadasd</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>asdasdasdas</preguntaSecreta>
+    <respuestaSecreta>asdasda</respuestaSecreta>
+  </Cliente>
 </root>

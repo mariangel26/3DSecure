@@ -22,9 +22,9 @@ public class PruebaBancoCliente {
 
     public static void main(String[] args) throws IOException {
         
-        //new HiloPrincipalServidor().start();
+        new HiloPrincipalServidor().start();
         
-        HiloProcesaServidor.enviarABancoVendedor("");
+        //HiloProcesaServidor.enviarABancoVendedor("");
     }
     
 }

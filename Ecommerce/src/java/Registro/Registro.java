@@ -10,6 +10,9 @@ package Registro;
  * @author oswalm
  */
 public class Registro {
+    //DATOS PARA EL XML
+    public static final String UBICACION_ARCHIVO_XML_CLIENTE = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/src/java/XML/Cliente.xml";
+    public static final String UBICACION_ARCHIVO_XML_PRODUCTO = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/src/java/XML/Producto.xml";
     //DATOS PARA SOCKET
     public static final Integer PUERTO_CONEXION_CLIENTE = 3000;
     public static final Integer PUERTO_CONEXION_SERVIDOR = 5000;

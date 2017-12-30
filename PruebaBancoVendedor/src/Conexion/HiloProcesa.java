@@ -39,20 +39,20 @@ public class HiloProcesa extends Thread {
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
                 clientSocket.close();
-                enviarAeCommerce(mensaje);
+                HiloProcesa.enviarAeCommerce(mensaje);
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void enviarAeCommerce(String mensaje){
+    public static void enviarAeCommerce(String mensaje){
         
         try {
-            System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
+            System.setProperty("javax.net.ssl.trustStore", "ecommerce.store");
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             Socket client;
-            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
+            client = clientFactory.createSocket("localhost", Registro.PUERTO_CONEXION_CLIENTE);
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
