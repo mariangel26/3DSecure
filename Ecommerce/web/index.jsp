@@ -10,6 +10,7 @@
 
 <!DOCTYPE html>
 <html>
+    <title>Login</title>
        <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <form class='login-form' action="login" method="post">
   <div class="flex-row">

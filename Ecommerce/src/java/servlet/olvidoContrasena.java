@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 
 /**
  *
@@ -39,6 +41,14 @@ public class olvidoContrasena extends HttpServlet {
         String pregunta = request.getParameter("pregunta");
         String respuesta = request.getParameter("respuesta");
         String contrasena = request.getParameter("contrasena");
+        //SE VERIFICA EL CAPTCHA
+            String remoteAddr = request.getRemoteAddr();
+            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+            reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+            
+            String challenge = request.getParameter("recaptcha_challenge_field");
+            String uresponse = request.getParameter("recaptcha_response_field");
+            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
         
         if(user != "" && respuesta != "" && pregunta != ""){
             DAOCliente dao = new DAOCliente(); 
@@ -46,7 +56,7 @@ public class olvidoContrasena extends HttpServlet {
             if(cliente != null){
                 if(cliente.getPreguntaSecreta().equals(pregunta) && 
                         cliente.getRespuestaSecreta().equals(respuesta) &&
-                        verificarContrasena(contrasena)){
+                        verificarContrasena(contrasena) && reCaptchaResponse.isValid()){
                     Integer hash = toHash(contrasena);
                     cliente.setIntentos(0);
                     cliente.setContrasena(hash.toString());

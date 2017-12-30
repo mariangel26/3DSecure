@@ -4,7 +4,7 @@
 }
 
 html, body {
-  height: 400px;
+  height: 100%;
 }
 
 body {
@@ -28,6 +28,7 @@ body {
 }
 body:before {
   content: '';
+  position: absolute;
   top: 0;
   left: 0;
   height: 100%;

@@ -5,7 +5,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Carrito</title>
+  <title>So Awesome</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
@@ -18,9 +18,23 @@
     padding: 0;
 }
 body {
-    background-color: #F2EEE9;
-    font: normal 13px/1.5 Georgia, Serif;
-    color: #333;
+    display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+  background: linear-gradient(135deg, rgba(36, 46, 77, 0.9), rgba(137, 126, 121, 0.9));
+  font-family: 'Roboto', helvetica, arial, sans-serif;
+  font-size: 1.5em;
 }
 .wrapper {
     width: 705px;
@@ -50,6 +64,7 @@ h1 {
     margin: 0 10px 10px 0;
     width: 205px;
     padding: 10px;
+    border-radius: 25px;
     height: 290px;
 }
 .item img {
@@ -117,7 +132,7 @@ span {
 
             <p>Precio: <em><%=pr.getPrecioProducto()%></em>
             </p>
-            <button class="add-to-cart" type="button">Compra</button>
+            <button class="add-to-cart" type="button">Comprar</button>
             </div>
      
     <%
