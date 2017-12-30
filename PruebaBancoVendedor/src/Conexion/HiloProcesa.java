@@ -38,25 +38,26 @@ public class HiloProcesa extends Thread {
                //Mensaje que llega:
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
-                enviarAeCommerce(mensaje);
-                
+                clientSocket.close();
+                HiloProcesa.enviarAeCommerce(mensaje);
+            
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("ESTOY AQUI POR ALGUN EXTRANO MOTIVO QUE ES POCO PROBABLE");
         }
     }
     
-    public void enviarAeCommerce(String mensaje){
-        System.out.println("ENTRE EN EL METODO DE ENVIAR AL ECOMMERCE");
+    public static void enviarAeCommerce(String mensaje){
+        
         try {
-            System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-        SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-        Socket client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-        ObjectOutputStream salidaObjeto;      
-        //Se colocan los datos del nodo (Direccion IP y Puerto).
-        salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-        //El cliente manda:
-        salidaObjeto.writeObject("NO");
+            System.setProperty("javax.net.ssl.trustStore", "ecommerce.store");
+            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            Socket client;
+            client = clientFactory.createSocket("localhost", Registro.PUERTO_CONEXION_CLIENTE);
+            ObjectOutputStream salidaObjeto;      
+            //Se colocan los datos del nodo (Direccion IP y Puerto).
+            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
+            salidaObjeto.writeObject(mensaje + " HOLA HOLA SOY EL BANCO DEL VENDEDOR");
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
         }catch(Exception ex){

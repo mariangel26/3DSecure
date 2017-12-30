@@ -10,7 +10,7 @@
     <body>
         <center><h1>Sign Up</h1></center>
         
-        <form action="singUp" method="post">
+        <form action="singUp" method="post" onsubmit="return validar()">
             <table align="center">
                 <center>
                     <tr>
@@ -39,7 +39,7 @@
                 </tr>
                  <tr>
                     <th align="right">Password:</th>
-                    <td><input type="password" name="txtpassword" placeholder="Password"></td>
+                    <td><input type="password" id = "txtpassword" name="txtpassword" placeholder="Password"></td>
                 </tr>
                 </center>
                 <center>
@@ -58,6 +58,62 @@
                 
             </table>
         </form>
+            <script>     
+            function validar(){
+                var password = document.getElementById("txtpassword").value.toString();
+                var respuesta = true;
+              if((password===document.getElementById("txtpassword").value)){ 
+                  
+                  if(!poseeMayusculas(password)){
+                      alert("LA CONTRASENA DEBE TENER AL MENOS 1 LETRA MAYUSCULA");
+                      respuesta = false;
+                  }
+                  if(!poseeNoalfanumericos(password)){
+                      alert("LA CONTRASENA DEBE TENER AL MENOS 1 CARACTER ALFANUMERICO");
+                      respuesta = false;
+                  }
+                  if(!esMayorA10(password)){
+                      alert("LA CONTRASENA DEBE TENER AL MENOS 10 CARACTERES");
+                      respuesta = false;
+                  }
+                  
+              }else{
+                  alert("Las contrasenas son distintas!");
+                  return false;
+              }
+              return respuesta;
+              
+              
+            }
+            var letras="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
+            function poseeMayusculas(texto){
+               for(i=0; i<texto.length; i++){
+                  if (letras.indexOf(texto.charAt(i),0)!=-1){
+                     return true;
+                  }
+               }
+               return false;
+            }
+            var noalfanumericos="|@#~ª¨^€¬=)(!*Ç{[]}-./&%$·,+<>";
+            function poseeNoalfanumericos(texto){
+               for(i=0; i<texto.length; i++){
+                  if (noalfanumericos.indexOf(texto.charAt(i),0)!=-1){
+                     return true;
+                  }
+               }
+               return false;
+            }
+            
+            function esMayorA10(texto){
+                if(texto.length > 10){
+                    return true;
+                }
+                return false;
+            }
+
+        </script>
     </body>
+    
+    
 </html>
 
