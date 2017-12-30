@@ -10,6 +10,10 @@ package Registro;
  * @author oswalm
  */
 public class Registro {
+    //DATOS PARA EL XML
+        public static final String UBICACION_XML_VENDEDOR = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoVendedor/src/XML/Vendedor.xml";
+
+    
     //DATOS PARA SOCKET
     public static final Integer PUERTO_CONEXION_SERVIDOR = 4000;
     
