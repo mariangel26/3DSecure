@@ -69,6 +69,7 @@ public class HiloProcesaServidor extends Thread {
     public static void enviarABancoVendedor(String mensaje){
         
         try {
+            String[] split = mensaje.split(";");
             //System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
@@ -79,9 +80,9 @@ public class HiloProcesaServidor extends Thread {
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
             if(HiloProcesaServidor.tieneDinero(mensaje)){
-                salidaObjeto.writeObject("ACEPTADO");
+                salidaObjeto.writeObject("ACEPTADO;"+split[7]);
             }else{
-                salidaObjeto.writeObject("RECHAZADO");
+                salidaObjeto.writeObject("RECHAZADO;"+split[7]);
             }
             
             client.close();

@@ -5,6 +5,8 @@
  */
 package Conexion;
 
+import DAO.DAOVendedor;
+import Modelo.Vendedor;
 import Registro.Registro;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,8 +41,13 @@ public class HiloProcesa extends Thread {
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (EL BANCO CLIENTE) envio: "+mensaje);
                 clientSocket.close();
-                //HiloProcesa.enviarAeCommerce(mensaje);
+                String[] split = mensaje.split(";");
+                if(split[0].equals("ACEPTADO")){
+                    actualizarDineroVendedor(Long.parseLong(split[1]));
+                }
+                //HiloProcesa.enviarAeCommerce(split[0]);
             
+                
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("ESTOY AQUI POR ALGUN EXTRANO MOTIVO QUE ES POCO PROBABLE");
@@ -64,6 +71,18 @@ public class HiloProcesa extends Thread {
             System.out.println("ME QUEDE PEGADO EN ESTA EXCEPCION WE");
         }
         
+    }
+    /**
+     * Metodo que se encarga de  actualizar el dinero acumulado del vendedor
+     * en el caso de que se haya 
+     * @param dinero dinero recibido 
+     */
+    public static void actualizarDineroVendedor(Long dinero){
+        System.out.println("VOY A EDITAR A BANCO VENDEDOR");
+        DAOVendedor dao = new DAOVendedor();
+        Vendedor vendedor = dao.buscarId(1);
+        vendedor.setDineroDepositado(vendedor.getDineroDepositado() + dinero);
+        dao.actualizarVendedor(vendedor);
     }
     
     

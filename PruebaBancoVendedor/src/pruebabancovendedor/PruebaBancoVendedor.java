@@ -6,6 +6,8 @@
 package pruebabancovendedor;
 
 import Conexion.HiloPrincipal;
+import DAO.DAOVendedor;
+import Modelo.Vendedor;
 import Registro.Registro;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -25,6 +27,10 @@ public class PruebaBancoVendedor {
      */
     public static void main(String[] args) throws IOException {
         new HiloPrincipal().start();
+        //en el caso que se desee registrar a un vendedor
+        //Vendedor vendedor = new Vendedor(2,0L);
+        //DAOVendedor dao = new DAOVendedor();
+        //dao.registrarVendedor(vendedor);
         
     }
     
