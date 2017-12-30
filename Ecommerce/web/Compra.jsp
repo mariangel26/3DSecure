@@ -7,20 +7,20 @@
      
     <title>Compra</title>
        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <%! 
-        String precio;
-    %>
-    <%
-      precio = session.getAttribute("precio").toString();
-    %>
     <form class='login-form' action="compra" method="post" onsubmit="return validar()">
     <div>
+        <center>
+          <a>
+            <th>Precio Unitario: </th>   
+          </a>  
+        <%
+            String precio; 
+            precio = request.getParameter("precio");
+        %>
         <a>
-            <th>Precio Total: </th>   
+            <th class='lf--signup' align='center'><%= precio %></th>
         </a>
-        <a>
-            <th class='lf--signup' align='center'><%=precio%></th>
-        </a>
+      </center>
     </div>
     
     

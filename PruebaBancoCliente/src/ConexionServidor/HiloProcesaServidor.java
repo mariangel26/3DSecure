@@ -37,7 +37,7 @@ public class HiloProcesaServidor extends Thread {
                //Mensaje que llega:
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (PAGINA ECOMMERCE) envio: "+mensaje);
-                clientSocket.close();
+                
                 /*
                     aqui deberia RECIBIR la informacion para verificar si los datos son correctos:
                     si los datos son incorrectos se le debe responder a la pagina que son incorrectos xd
@@ -46,6 +46,8 @@ public class HiloProcesaServidor extends Thread {
                 
                     if(datosCorrectos(mensaje)){
                         System.out.println("LOS DATOS SON CORRECTOS YAY");
+                        //enviar a la pagina si es bueno o malo
+                        //envio
                        // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
                     }else{
                         //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
@@ -61,7 +63,7 @@ public class HiloProcesaServidor extends Thread {
                     sino es mayor le dice al banco del vendedor que no se puede efectuar la comunicacion
                 */
                 
-                
+                clientSocket.close();
             
         } catch (Exception ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);

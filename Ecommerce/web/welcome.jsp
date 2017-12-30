@@ -78,7 +78,7 @@ h2 {
     margin: 0 0 10px 0;
     padding: 0 0 5px 0;
 }
-input {
+button {
     border: 1px solid #722A1B;
     padding: 4px 14px;
     background-color: #fff;
@@ -130,19 +130,14 @@ span {
            <div class="item">
             <img align=center border=0 src="<%=pr.getFotoProducto()%>" alt="item" />
             <h2> <%=pr.getNombreProducto()%> </h2>
-            <form method="POST" action="welcome">
+            
              
-                <p>Precio: <%=pr.getPrecioProducto()%></p>    
-             
-                <%
-                  session.setAttribute("precio", pr.getPrecioProducto());
-                %>
-                <label>
-                    <input class="add-to-cart" type="submit" value='<%= pr.getIdProducto() %> - Comprar' name='comprar'> 
-                
-                </label>
+                <p>Precio: <%= pr.getPrecioProducto()%></p>    
+            
+                <a href="Compra.jsp?precio=<%out.print(pr.getPrecioProducto());%>">
+                    <button class="add-to-cart" type="submit" name='comprar'> Comprar </button>
+                </a>  
                
-            </form>
             
             </div>
      
