@@ -18,9 +18,21 @@
         <fotoProducto>https://i5.walmartimages.ca/images/Thumbnails/753/556/6000197753556.jpg?odnBound=200</fotoProducto>
     </Producto>
     <Producto>
-        <nombreProducto>AWESOME DONUTS</nombreProducto>
-        <precioProducto>50</precioProducto>
+        <nombreProducto>Chaqueta Femenina</nombreProducto>
+        <precioProducto>500</precioProducto>
         <idProducto>4</idProducto>
-        <fotoProducto>https://www.babble.com/wp-content/uploads/2013/10/painted-donuts-200x200.jpg</fotoProducto>
+        <fotoProducto>https://www.dhresource.com/200x200/f2/albu/g5/M00/25/60/rBVaJFlxyqeAPKamAADRfX1ilQI599.jpg</fotoProducto>
+    </Producto>
+    <Producto>
+        <nombreProducto>Chaqueta Masculina</nombreProducto>
+        <precioProducto>400</precioProducto>
+        <idProducto>5</idProducto>
+        <fotoProducto>https://i.ebayimg.com/thumbs/images/g/6zcAAOSwzQFZ74DT/s-l200.jpg</fotoProducto>
+    </Producto>
+    <Producto>
+        <nombreProducto>Chaqueta Con Flores</nombreProducto>
+        <precioProducto>600</precioProducto>
+        <idProducto>6</idProducto>
+        <fotoProducto>https://gl-images.condecdn.net/image/z6JrmQ9dNVq/crop/200</fotoProducto>
     </Producto>
 </root>

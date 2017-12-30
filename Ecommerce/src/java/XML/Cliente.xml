@@ -20,16 +20,6 @@
     <respuestaSecreta>respuesta</respuestaSecreta>
   </Cliente>
   <Cliente>
-    <nombreUsuario>a</nombreUsuario>
-    <contrasena>1400612471</contrasena>
-    <nombre>A</nombre>
-    <apellido>A</apellido>
-    <correo>A</correo>
-    <intentos>0</intentos>
-    <preguntaSecreta>A</preguntaSecreta>
-    <respuestaSecreta>A</respuestaSecreta>
-  </Cliente>
-  <Cliente>
     <nombreUsuario>m</nombreUsuario>
     <contrasena>1400612471</contrasena>
     <nombre>mari</nombre>
@@ -48,5 +38,25 @@
     <intentos>0</intentos>
     <preguntaSecreta>hola</preguntaSecreta>
     <respuestaSecreta>hola</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>a</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>A</nombre>
+    <apellido>A</apellido>
+    <correo>A</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>A</preguntaSecreta>
+    <respuestaSecreta>A</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>z</nombreUsuario>
+    <contrasena>2067514199</contrasena>
+    <nombre>z</nombre>
+    <apellido>z</apellido>
+    <correo>z</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>z</preguntaSecreta>
+    <respuestaSecreta>z</respuestaSecreta>
   </Cliente>
 </root>
