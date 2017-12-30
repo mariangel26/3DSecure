@@ -12,7 +12,7 @@
 <html>
     <title>Login</title>
        <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <form class='login-form' action="login" method="post">
+       <form class='login-form' action="login" method="post" onsubmit="return validar()">
   <div class="flex-row">
     <label class="lf--label" for="username">
       <svg x="0px" y="0px" width="12px" height="13px">
@@ -54,6 +54,29 @@
   </div>
   
 </form>
+  <script>
+      function validar(){
+          let respuesta = true;
+          if(!noHayVacio()){
+              respuesta = false;
+          }
+          return respuesta;
+      }
+    function noHayVacio(){
+        var respuesta = true;
+        if(document.getElementById("username").value===""){
+            alert("EL CAMPO DE NOMBRE DE USUARIO NO PUEDE ESTAR VACIO");
+            respuesta = false;
+        }
+        if(document.getElementById("password").value===""){
+            alert("EL CAMPO DE CONTRASENA NO PUEDE ESTAR VACIO");
+            respuesta = false;
+        }
+
+        return respuesta
+
+    }
+  </script>
 
     
 </html>

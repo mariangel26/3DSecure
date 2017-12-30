@@ -1,6 +1,7 @@
 package DAO;
 
 import Modelo.Producto;
+import Registro.Registro;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
@@ -19,8 +20,9 @@ import org.jdom.output.XMLOutputter;
  */
 public class DAOProducto {
     private Element root;
-    private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\src\\java\\XML\\Producto.xml";// mariangel
+    //private String fileLocation = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\src\\java\\XML\\Producto.xml";// mariangel
     //private String fileLocation = "C:\\Users\\oswal\\Documents\\NetBeansProjects\\ProyectoVendedor\\src\\java\\XML\\Producto.xml";
+    private String fileLocation = Registro.UBICACION_ARCHIVO_XML_PRODUCTO;
     
     public DAOProducto() {
         try {

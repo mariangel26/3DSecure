@@ -59,4 +59,14 @@
     <preguntaSecreta>z</preguntaSecreta>
     <respuestaSecreta>z</respuestaSecreta>
   </Cliente>
+  <Cliente>
+    <nombreUsuario>oswallopezm</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>Oswaldo</nombre>
+    <apellido>Lopez</apellido>
+    <correo>oswaldo7365@hotmail.com</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>donde nacio mi mama</preguntaSecreta>
+    <respuestaSecreta>caracas</respuestaSecreta>
+  </Cliente>
 </root>
