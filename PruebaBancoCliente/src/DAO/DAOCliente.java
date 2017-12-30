@@ -95,9 +95,9 @@ public class DAOCliente {
                 element.getChildText("correoCliente"),
                 Long.parseLong(element.getChildText("tarjetaCliente")),
                 Long.parseLong(element.getChildText("dineroDisponible")),
-                element.getChildText("dineroDisponible"),
-                element.getChildText("dineroDisponible"),
-                Integer.parseInt(element.getChildText("dineroDisponible"))
+                element.getChildText("mesCaduciodad"),
+                element.getChildText("anoCaduciodad"),
+                Integer.parseInt(element.getChildText("codigoSeguridad"))
         );
         return nCliente;
     }

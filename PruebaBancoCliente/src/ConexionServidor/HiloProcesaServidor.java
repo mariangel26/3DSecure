@@ -39,20 +39,26 @@ public class HiloProcesaServidor extends Thread {
                 System.out.println("El cliente (PAGINA ECOMMERCE) envio: "+mensaje);
                 clientSocket.close();
                 /*
-                    aqui deberia enviar la informacion para verificar si los datos son correctos
-                    y verificar si tiene el monto disponible
+                    aqui deberia RECIBIR la informacion para verificar si los datos son correctos:
+                    si los datos son incorrectos se le debe responder a la pagina que son incorrectos xd
+                    si son los datos correctos se envia el mensaje al servidor
+                
+                    if(verificarDatos(mensaje)){
+                        //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON CORRECTOS
+                        HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
+                    }else{
+                        //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
+                    }   
+                    
                 */
                 
                 /*
+                    verificar si tiene el monto disponible:
                     en caso de que el monto disponible sea mayor al monto solicitado le envia al banco vendedor
                     que proceda la transaccion
                     sino es mayor le dice al banco del vendedor que no se puede efectuar la comunicacion
                 */
-                if(HiloProcesaServidor.tieneDinero("")){
-                    enviarABancoVendedor("SI");
-                }else{
-                    enviarABancoVendedor("NO");
-                }
+                
                 
             
         } catch (Exception ex) {
@@ -64,15 +70,20 @@ public class HiloProcesaServidor extends Thread {
         
         try {
             //System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-            System.setProperty("javax.net.ssl.trustStore", "server.store");
+            System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             Socket client;
-            //client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-            client = clientFactory.createSocket("localhost", 4000);
+            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
+            //client = clientFactory.createSocket("localhost", 4000);
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject(mensaje);
+            if(HiloProcesaServidor.tieneDinero(mensaje)){
+                salidaObjeto.writeObject("ACEPTADO");
+            }else{
+                salidaObjeto.writeObject("RECHAZADO");
+            }
+            
             client.close();
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,14 +106,16 @@ public class HiloProcesaServidor extends Thread {
      * metodo que se encarga de verificar si la persona posee el dinero solicitado
      * @return 
      */
+    //"25253393;4532314510308244;10;21;218;oswaldo;lopez;350000"
     public static Boolean tieneDinero(String mensaje){
         Boolean correcto = true;
+        String[] split = mensaje.split(";");
         DAOCliente dao = new DAOCliente();
-            Cliente cliente = dao.buscarCedula(25253393);
-            if(cliente.getDineroDisponible() <= 200000){
+            Cliente cliente = dao.buscarCedula(Integer.parseInt(split[0]));
+            if(cliente.getDineroDisponible() <= Long.parseLong(split[7])){
                 correcto = false;
             }else{
-                cliente.setDineroDisponible(cliente.getDineroDisponible()-200000);
+                cliente.setDineroDisponible(cliente.getDineroDisponible()-Long.parseLong(split[7]));
                 dao.actualizarCliente(cliente);
                 correcto = true;
             }
