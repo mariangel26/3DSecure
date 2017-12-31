@@ -79,17 +79,10 @@ public class DAOCliente {
                 element.getChildText("respuestaSecreta")
                 
         );
-        System.out.println("EN CLIENTETOOBJECT");
-        System.out.println("cliente.getPreguntaSecreta(): " + nCliente.getPreguntaSecreta());
-                System.out.println("cliente.getRespuestaSecreta(): "+ nCliente.getRespuestaSecreta());
         return nCliente;
     }
     
     public boolean registrarCliente(Cliente cliente) {
-        System.out.println("DATOS DEL CLIENTES EN DAOCliente registrarcliente : \n"
-                        + cliente.getNombre() + " "+cliente.getApellido()+ " "+cliente.getNombreUsuario() + " "+
-                        cliente.getContrasena()+ " "+cliente.getPreguntaSecreta()+ " "+cliente.getRespuestaSecreta() + "\n");
-                
         boolean resultado = false;
         root.addContent(ClientetoXmlElement((Cliente) cliente));
         resultado = updateDocument();
