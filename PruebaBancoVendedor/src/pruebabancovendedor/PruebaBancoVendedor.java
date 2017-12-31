@@ -6,6 +6,7 @@
 package pruebabancovendedor;
 
 import Conexion.HiloPrincipal;
+import Conexion.HiloProcesa;
 import DAO.DAOVendedor;
 import Modelo.Vendedor;
 import Registro.Registro;
@@ -26,7 +27,8 @@ public class PruebaBancoVendedor {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        new HiloPrincipal().start();
+        //new HiloPrincipal().start();
+        HiloProcesa.enviarAeCommerce("ACEPTADO");
         //en el caso que se desee registrar a un vendedor
         //Vendedor vendedor = new Vendedor(2,0L);
         //DAOVendedor dao = new DAOVendedor();

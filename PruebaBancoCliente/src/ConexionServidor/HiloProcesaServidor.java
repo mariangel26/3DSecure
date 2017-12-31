@@ -38,6 +38,7 @@ public class HiloProcesaServidor extends Thread {
                 String mensaje = (String)ois.readObject();
                 System.out.println("El cliente (PAGINA ECOMMERCE) envio: "+mensaje);
                 
+                
                 /*
                     aqui deberia RECIBIR la informacion para verificar si los datos son correctos:
                     si los datos son incorrectos se le debe responder a la pagina que son incorrectos xd
@@ -47,12 +48,14 @@ public class HiloProcesaServidor extends Thread {
                         //Se colocan los datos del nodo (Direccion IP y Puerto).
                         
                         salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
+                System.out.println("voy a procesar los datos");
                     if(datosCorrectos(mensaje)){
                        
                         salidaObjeto.writeObject("ACEPTADO");
                         
                         //envio
                        // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
+                       //HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;2021;218;oswaldo;lopez;3500");
                     }else{
                         System.out.println("ENTRE EN EL ELSE WE");
                         salidaObjeto.writeObject("RECHAZADO");
@@ -94,7 +97,7 @@ public class HiloProcesaServidor extends Thread {
             }else{
                 salidaObjeto.writeObject("RECHAZADO;"+split[7]);
             }
-            
+            salidaObjeto.close();
             client.close();
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);

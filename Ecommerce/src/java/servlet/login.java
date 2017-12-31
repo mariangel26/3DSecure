@@ -53,10 +53,10 @@ public class login extends HttpServlet {
            if (reCaptchaResponse.isValid()) {
                response.sendRedirect("welcome.jsp");
             } else {
-                response.sendRedirect("index.jsp");
+               response.sendRedirect("index.jsp");
             }
            
-        /*
+        
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         
@@ -84,11 +84,12 @@ public class login extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
         }
-        */
+        
         
         /*Este codigo se debe de pasar ala parte donde el usuario ingrese sus datos personales de banco
         de la pagina del banco*/
-        //new HiloPrincipalServidor().start();//prueba de creacion del servidor
+        //new HiloPrincipalServidor(response).recibir();//prueba de creacion del servidor
+        //response.sendRedirect("welcome.jsp");
         /*System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
             Socket client;
@@ -96,8 +97,11 @@ public class login extends HttpServlet {
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject("HOLA SOY LA PAGINA DE ECOMMERCE");
-        */
+            salidaObjeto.writeObject("25253393;4532314510308244;10;2021;218;oswaldo;lopez;350");
+            salidaObjeto.close();
+            client.close();
+            */
+        
     }
     
     private Integer toHash(String clave){

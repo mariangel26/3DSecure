@@ -64,7 +64,7 @@ public class HiloProcesa extends Thread {
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject(mensaje + " HOLA HOLA SOY EL BANCO DEL VENDEDOR");
+            salidaObjeto.writeObject(mensaje);
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesa.class.getName()).log(Level.SEVERE, null, ex);
         }catch(Exception ex){
@@ -78,7 +78,6 @@ public class HiloProcesa extends Thread {
      * @param dinero dinero recibido 
      */
     public static void actualizarDineroVendedor(Long dinero){
-        System.out.println("VOY A EDITAR A BANCO VENDEDOR");
         DAOVendedor dao = new DAOVendedor();
         Vendedor vendedor = dao.buscarId(1);
         vendedor.setDineroDepositado(vendedor.getDineroDepositado() + dinero);
