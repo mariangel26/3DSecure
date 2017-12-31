@@ -69,4 +69,14 @@
     <preguntaSecreta>donde nacio mi mama</preguntaSecreta>
     <respuestaSecreta>caracas</respuestaSecreta>
   </Cliente>
+  <Cliente>
+    <nombreUsuario>h</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>h</nombre>
+    <apellido>h</apellido>
+    <correo>h</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>h</preguntaSecreta>
+    <respuestaSecreta>h</respuestaSecreta>
+  </Cliente>
 </root>
