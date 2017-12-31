@@ -7,6 +7,7 @@ package servlet;
 
 import ConexionServidor.HiloPrincipalServidor;
 import DAO.DAOCliente;
+import Factura.Factura;
 import Modelo.Cliente;
 import Registro.Registro;
 import javax.servlet.annotation.WebServlet;
@@ -89,6 +90,7 @@ public class login extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
         }*/
+        
         if(capchaCorrecto(request) && clienteNoEsNull(user) && 
                 intentosMenorA3(user) && claveIgual(user,pass)){
             //se reincia la cantidad de intentos del usuario
@@ -101,21 +103,8 @@ public class login extends HttpServlet {
             response.sendRedirect("index.jsp");
         }
         
-        /*Este codigo se debe de pasar ala parte donde el usuario ingrese sus datos personales de banco
-        de la pagina del banco*/
-        //new HiloPrincipalServidor(response).recibir();//prueba de creacion del servidor
-        //response.sendRedirect("welcome.jsp");
-        /*System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            Socket client;
-            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-            ObjectOutputStream salidaObjeto;      
-            //Se colocan los datos del nodo (Direccion IP y Puerto).
-            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject("25253393;4532314510308244;10;2021;218;oswaldo;lopez;350");
-            salidaObjeto.close();
-            client.close();
-            */
+        //new HiloPrincipalServidor(response).recibir("Oswal Lopez","25253393","Donas","3","350","1050");
+        //response.sendRedirect("index.jsp");
         
     }
     /**
