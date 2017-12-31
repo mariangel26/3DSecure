@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 import ConexionCliente.*;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +39,7 @@ public class compra extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -46,7 +50,13 @@ public class compra extends HttpServlet {
         String nseguridad = request.getParameter("nseguridad");
         String fecha = request.getParameter("year_week");
         String cantidad = request.getParameter("cantidad");
-        String precio = "500";
+        String auxiliarPrecio = request.getParameter("precio");
+        Integer precio = Integer.parseInt(auxiliarPrecio);
+        Integer auxiliarCantidad = Integer.parseInt(cantidad);
+        
+        //MULTIPLICACION DE LA CANTIDAD
+            precio = (auxiliarCantidad * precio);
+        
         //SE VERIFICA EL CAPTCHA
             String remoteAddr = request.getRemoteAddr();
             ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
@@ -66,9 +76,25 @@ public class compra extends HttpServlet {
                 mes = split[1];
                 year = split [0];
                 String mensaje = cedula+";"+tarjeta+";"+mes+";"+year+";"
-                      +nseguridad+";"+nombre+";"+apellido+";"+precio+";";
-               evc.enviarABancoCliente(mensaje);
-               response.sendRedirect("welcome.jsp");
+                      +nseguridad+";"+nombre+";"+apellido+";"+precio.toString()+";";
+                
+               //ENVIO DATOS AL BANCO CLIENTE
+               String mensajeDelServer = evc.enviarABancoCliente(mensaje);
+               
+               
+               if(mensajeDelServer.equals("ACEPTADO")){
+                   response.sendRedirect("welcome.jsp");
+                   
+               }else{
+                   request.setAttribute("precio", auxiliarPrecio);
+                   request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
+ 
+                   response.sendRedirect("datosIncorrectos.jsp");
+               }
+                   
+                
+               
+               
                 
             }else{
                 response.sendRedirect("Compra.jsp");
@@ -92,7 +118,11 @@ public class compra extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -106,7 +136,11 @@ public class compra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

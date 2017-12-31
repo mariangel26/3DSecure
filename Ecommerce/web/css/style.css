@@ -54,6 +54,12 @@ body:before {
   position: relative;
   background: rgba(0, 0, 0, 0.15);
 }
+.login-form-datos{
+  width: 100%;
+  padding: 2em;
+  position: relative;
+  background: rgba(0, 0, 0, 0.15);
+}
 .login-form:before {
   content: '';
   position: absolute;
@@ -315,4 +321,10 @@ body:before {
 
 ::placeholder {
   color: #8f8f8f;
+}
+
+.big-text{ 
+font-family: 'Roboto', helvetica, arial, sans-serif;;
+text-transform: uppercase;
+
 }

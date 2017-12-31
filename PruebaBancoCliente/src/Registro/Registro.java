@@ -12,8 +12,8 @@ package Registro;
 public class Registro {
     
     //DATOS PARA SOCKET
-    public static final String UBICACION_XML_CLIENTE = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoCliente/src/XML/Cliente.xml";
-    //public static final String UBICACION_XML_CLIENTE = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoCliente\\src\\XML";
+    //public static final String UBICACION_XML_CLIENTE = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoCliente/src/XML/Cliente.xml";
+    public static final String UBICACION_XML_CLIENTE = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoCliente\\src\\XML\\Cliente.xml";
     
     public static final Integer PUERTO_CONEXION_CLIENTE = 4000;
     public static final Integer PUERTO_CONEXION_SERVIDOR = 3000;

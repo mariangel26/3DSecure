@@ -16,13 +16,14 @@
         <%
             String precio; 
             precio = request.getParameter("precio");
+            
         %>
         <a>
             <th class='lf--signup' align='center'><%= precio %></th>
         </a>
       </center>
     </div>
-    
+        <input type="hidden" value="<%=precio%>" name="precio">
     
     <div class="flex-row">
     <label class="lf--label" for="cantidad">

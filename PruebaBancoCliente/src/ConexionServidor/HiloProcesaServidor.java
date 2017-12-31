@@ -43,13 +43,19 @@ public class HiloProcesaServidor extends Thread {
                     si los datos son incorrectos se le debe responder a la pagina que son incorrectos xd
                     si son los datos correctos se envia el mensaje al servidor
                 */
-                
+                    ObjectOutputStream salidaObjeto;      
+                        //Se colocan los datos del nodo (Direccion IP y Puerto).
+                        
+                        salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
                     if(datosCorrectos(mensaje)){
-                        System.out.println("LOS DATOS SON CORRECTOS YAY");
-                        //enviar a la pagina si es bueno o malo
+                       
+                        salidaObjeto.writeObject("ACEPTADO");
+                        
                         //envio
                        // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
                     }else{
+                        System.out.println("ENTRE EN EL ELSE WE");
+                        salidaObjeto.writeObject("RECHAZADO");
                         //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
                     }   
                     
@@ -108,17 +114,22 @@ public class HiloProcesaServidor extends Thread {
         DAOCliente dao = new DAOCliente();
         Cliente cliente = dao.buscarCedula(Integer.parseInt(split[0]));
         //"25253393;4532314510308244;10;21;218;oswaldo;lopez;350000"
+      if(cliente != null) {
         if((cliente.getCedulaCliente() == Integer.parseInt(split[0])) &&
-           (cliente.getTarjetaCliente() == Long.parseLong(split[1])) &&
-           (cliente.getMesCaduciodad().equals(split[2])) &&
-           (cliente.getAnoCaduciodad().equals(split[3])) &&
-           (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) &&
-           (cliente.getNombreCliente().equals(split[5]) &&
-           (cliente.getApellidoCliente().equals(split[6])))){
-          correcto = true;
-        }else{
+             (cliente.getTarjetaCliente() == Long.parseLong(split[1])) &&
+             (cliente.getMesCaduciodad().equals(split[2])) &&
+             (cliente.getAnoCaduciodad().equals(split[3])) &&
+             (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) &&
+             (cliente.getNombreCliente().equals(split[5]) &&
+             (cliente.getApellidoCliente().equals(split[6])))){
+            correcto = true;
+          }else{
+            correcto = false;
+          }
+      }else{
           correcto = false;
-        }
+      }
+        
         
         return correcto;
     }

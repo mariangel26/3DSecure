@@ -3,6 +3,7 @@ package ConexionCliente;
 import ConexionServidor.HiloProcesaServidor;
 import Registro.Registro;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ public class EnvioBancoCliente {
     
     public EnvioBancoCliente(){}
     
-    public void enviarABancoCliente(String mensaje){
+    public String enviarABancoCliente(String mensaje) throws ClassNotFoundException{
         
         try {
           
@@ -29,14 +30,22 @@ public class EnvioBancoCliente {
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
             
-                salidaObjeto.writeObject(mensaje);
+            salidaObjeto.writeObject(mensaje);
            
+            ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
+            //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
+            //Mensaje que llega:
+             String mensajeDelServer = (String)ois.readObject();
             
-            client.close();
+             client.close();
+             
+             return mensajeDelServer;
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return null;
     }
     
 }
