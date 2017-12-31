@@ -134,7 +134,7 @@ span {
              
                 <p>Precio: <%= pr.getPrecioProducto()%></p>    
             
-                <a href="Compra.jsp?precio=<%out.print(pr.getPrecioProducto());%>">
+                <a href="Compra.jsp?precio=<%out.print(pr.getPrecioProducto());%>&nombreP=<%out.print(pr.getNombreProducto());%>">
                     <button class="add-to-cart" type="submit" name='comprar'> Comprar </button>
                 </a>  
                

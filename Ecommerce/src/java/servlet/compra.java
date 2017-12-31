@@ -51,6 +51,7 @@ public class compra extends HttpServlet {
         String fecha = request.getParameter("year_week");
         String cantidad = request.getParameter("cantidad");
         String auxiliarPrecio = request.getParameter("precio");
+        String nombreProducto = request.getParameter("nombreP");
         Integer precio = Integer.parseInt(auxiliarPrecio);
         Integer auxiliarCantidad = Integer.parseInt(cantidad);
         
@@ -87,6 +88,7 @@ public class compra extends HttpServlet {
                    
                }else{
                    request.setAttribute("precio", auxiliarPrecio);
+                   request.setAttribute("nombreP", nombreProducto);
                    request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
  
                    response.sendRedirect("datosIncorrectos.jsp");

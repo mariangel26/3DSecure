@@ -9,21 +9,28 @@
        <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <form class='login-form' action="compra" method="post" onsubmit="return validar()">
     <div>
+        <%
+            String precio, nombreP; 
+            precio = request.getParameter("precio");
+            nombreP = request.getParameter("nombreP");
+        %>
+        <center>
+         <a>
+            <th class='lf--signup' align='center'><%= nombreP %></th>
+        </a>
+        </center>
         <center>
           <a>
             <th>Precio Unitario: </th>   
           </a>  
-        <%
-            String precio; 
-            precio = request.getParameter("precio");
-            
-        %>
+        
         <a>
             <th class='lf--signup' align='center'><%= precio %></th>
         </a>
       </center>
     </div>
         <input type="hidden" value="<%=precio%>" name="precio">
+        <input type="hidden" value="<%=nombreP%>" name="nombreP">
     
     <div class="flex-row">
     <label class="lf--label" for="cantidad">
