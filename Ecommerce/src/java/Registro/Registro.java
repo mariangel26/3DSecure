@@ -21,9 +21,11 @@ public class Registro {
     
     public static final String IP_CONEXION = "localhost";
     //DATOS PARA SSL
-    public static final String KEY_STORE_SERVIDOR = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\ecommerce.store";    
+    //public static final String KEY_STORE_SERVIDOR = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\ecommerce.store";    
+    public static final String KEY_STORE_SERVIDOR = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/ecommerce.store";    
 
     public static final String KEY_STORE_PASSWORD = "123456";
-    public static final String TRUST_STORE_CLIENTE = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\bancocliente.store";
+    //public static final String TRUST_STORE_CLIENTE = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\bancocliente.store";
+    public static final String TRUST_STORE_CLIENTE = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/bancocliente.store";
     public static final String TRUST_STORE_PASSWORD = "123456";
 }
