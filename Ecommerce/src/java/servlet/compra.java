@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 import ConexionCliente.*;
+import ConexionServidor.HiloPrincipalServidor;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -59,16 +60,16 @@ public class compra extends HttpServlet {
             precio = (auxiliarCantidad * precio);
         
         //SE VERIFICA EL CAPTCHA
-            String remoteAddr = request.getRemoteAddr();
-            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-            reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
-            
-            String challenge = request.getParameter("recaptcha_challenge_field");
-            String uresponse = request.getParameter("recaptcha_response_field");
-            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-            
-            if((cantidad!="")&&(nombre != "")&&(apellido != "")&&(cedula != "")&&
-                (tarjeta != "")&&(nseguridad != "")&&(fecha != "")){
+        String remoteAddr = request.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+        if((cantidad!="")&&(nombre != "")&&(apellido != "")&&(cedula != "")&&
+            (tarjeta != "")&&(nseguridad != "")&&(fecha != "")){
             if((reCaptchaResponse.isValid())){
                 
                 EnvioBancoCliente evc = new EnvioBancoCliente();
@@ -85,7 +86,10 @@ public class compra extends HttpServlet {
                
                if(mensajeDelServer.equals("ACEPTADO")){
                    response.sendRedirect("welcome.jsp");
-                   
+                   //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
+                   //new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
+                   //        cedula,nombreProducto,cantidad,auxiliarPrecio,
+                   //        precio.toString());
                }else{
                    request.setAttribute("precio", auxiliarPrecio);
                    request.setAttribute("nombreP", nombreProducto);
@@ -99,10 +103,12 @@ public class compra extends HttpServlet {
                
                 
             }else{
+                System.out.println("El capcha no es correcto");
                 response.sendRedirect("Compra.jsp");
             }
             
         }else{
+                System.out.println("uno de los campos esta vacio");
                 response.sendRedirect("Compra.jsp");
             }
         }

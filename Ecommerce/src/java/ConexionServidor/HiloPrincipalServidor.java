@@ -5,6 +5,7 @@
  */
 package ConexionServidor;
 
+import Factura.Factura;
 import Registro.Registro;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -28,8 +29,18 @@ public class HiloPrincipalServidor extends Thread{
     }
     
     
+  /**
+   * metodo que se encarga de recibir del banco vendedor si se acepto la operacion
+   * o no
+   * @param nombreApellido
+   * @param cedula
+   * @param nombreProducto
+   * @param cantidad
+   * @param precioDetal
+   * @param precioTotal 
+   */
     
-    public void run(){
+    public void recibir(String nombreApellido,String cedula,String nombreProducto, String cantidad, String precioDetal,String precioTotal){
         System.out.println("VENDEDOR COMO Servidor empieza a correr");
         try {
             System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
@@ -38,63 +49,23 @@ public class HiloPrincipalServidor extends Thread{
             ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR);
             Socket clientSocket; 
             //for(;;){
-                System.out.println("Servidor esperando que alguien se conecte");
-                clientSocket = serverSocket.accept();
-                ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-               //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
-               //Mensaje que llega:
-                String mensaje = (String)ois.readObject();
-                if(mensaje.equals("ACEPTADO")){
-                    System.out.println("Mando aceptado");
-                    //response.sendRedirect("welcome.jsp");
-                    //logica para generar factura
-                    //ademas de mostrar una pagina de exito en el front
-                }else{
-                    System.out.println("mando rechazado: ");
-                    //response.sendRedirect("signUp.jsp");
-                    //mostrar una pagina de fallo en el front
-                }
-                System.out.println("El cliente (EL BANCO DEL VENDEDOR) envio: "+mensaje);
-                ois.close();
-                clientSocket.close();
-                //new HiloProcesaServidor(clientSocket).start();
-            //}
-        } catch (IOException ex) {
-            Logger.getLogger(HiloPrincipalServidor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HiloPrincipalServidor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void recibir(){
-        System.out.println("VENDEDOR COMO Servidor empieza a correr");
-        try {
-            System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
-            System.setProperty("javax.net.ssl.keyStorePassword", Registro.KEY_STORE_PASSWORD);
-            SSLServerSocketFactory serverFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR);
-            Socket clientSocket; 
-            //for(;;){
-                System.out.println("Servidor esperando que alguien se conecte");
-                clientSocket = serverSocket.accept();
-                ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
-               //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
-               //Mensaje que llega:
-                String mensaje = (String)ois.readObject();
-                if(mensaje.equals("ACEPTADO")){
-                    System.out.println("Mando aceptado");
-                    response.sendRedirect("welcome.jsp");
-                    response.sendRedirect("signUp.jsp");
-                    //logica para generar factura
-                    //ademas de mostrar una pagina de exito en el front
-                }else{
-                    System.out.println("mando rechazado: ");
-                    response.sendRedirect("signUp.jsp");
-                    //mostrar una pagina de fallo en el front
-                }
-                System.out.println("El cliente (EL BANCO DEL VENDEDOR) envio: "+mensaje);
-                ois.close();
-                clientSocket.close();
+            System.out.println("Servidor esperando que alguien se conecte");
+            clientSocket = serverSocket.accept();
+            ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+           //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
+           //Mensaje que llega:
+            String mensaje = (String)ois.readObject();
+            if(mensaje.equals("ACEPTADO")){
+                Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
+                response.sendRedirect("CompraExitosa.jsp");
+
+            }else{
+                response.sendRedirect("FondosInsuficientes.jsp");
+            }
+            System.out.println("El cliente (EL BANCO DEL VENDEDOR) envio: "+mensaje);
+            ois.close();
+            serverSocket.close();
+            clientSocket.close();
                 //new HiloProcesaServidor(clientSocket).start();
             //}
         } catch (IOException ex) {

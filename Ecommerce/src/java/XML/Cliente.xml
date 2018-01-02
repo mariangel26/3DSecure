@@ -10,16 +10,6 @@
     <respuestaSecreta>respuesta</respuestaSecreta>
   </Cliente>
   <Cliente>
-    <nombreUsuario>oswalm</nombreUsuario>
-    <contrasena>1400612502</contrasena>
-    <nombre>oswaldo</nombre>
-    <apellido>Reyes</apellido>
-    <correo>oswaldo7365@hotmail.com</correo>
-    <intentos>1</intentos>
-    <preguntaSecreta>pregunta</preguntaSecreta>
-    <respuestaSecreta>respuesta</respuestaSecreta>
-  </Cliente>
-  <Cliente>
     <nombreUsuario>m</nombreUsuario>
     <contrasena>1400612471</contrasena>
     <nombre>mari</nombre>
@@ -40,16 +30,6 @@
     <respuestaSecreta>hola</respuestaSecreta>
   </Cliente>
   <Cliente>
-    <nombreUsuario>a</nombreUsuario>
-    <contrasena>1400612471</contrasena>
-    <nombre>A</nombre>
-    <apellido>A</apellido>
-    <correo>A</correo>
-    <intentos>0</intentos>
-    <preguntaSecreta>A</preguntaSecreta>
-    <respuestaSecreta>A</respuestaSecreta>
-  </Cliente>
-  <Cliente>
     <nombreUsuario>z</nombreUsuario>
     <contrasena>2067514199</contrasena>
     <nombre>z</nombre>
@@ -60,14 +40,14 @@
     <respuestaSecreta>z</respuestaSecreta>
   </Cliente>
   <Cliente>
-    <nombreUsuario>oswallopezm</nombreUsuario>
+    <nombreUsuario>oswalm</nombreUsuario>
     <contrasena>1400612471</contrasena>
-    <nombre>Oswaldo</nombre>
+    <nombre>oswaldo</nombre>
     <apellido>Lopez</apellido>
     <correo>oswaldo7365@hotmail.com</correo>
-    <intentos>0</intentos>
-    <preguntaSecreta>donde nacio mi mama</preguntaSecreta>
-    <respuestaSecreta>caracas</respuestaSecreta>
+    <intentos>3</intentos>
+    <preguntaSecreta>Pregunta</preguntaSecreta>
+    <respuestaSecreta>Respuesta</respuestaSecreta>
   </Cliente>
   <Cliente>
     <nombreUsuario>h</nombreUsuario>
@@ -78,5 +58,15 @@
     <intentos>0</intentos>
     <preguntaSecreta>h</preguntaSecreta>
     <respuestaSecreta>h</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>a</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>A</nombre>
+    <apellido>A</apellido>
+    <correo>A</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>A</preguntaSecreta>
+    <respuestaSecreta>A</respuestaSecreta>
   </Cliente>
 </root>

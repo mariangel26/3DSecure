@@ -20,7 +20,7 @@ public class Registro {
     public static final Integer PUERTO_CONEXION_CLIENTE = 5000;
     public static final String IP_CONEXION = "localhost";
     //DATOS PARA SSL
-    public static final String KEY_STORE_SERVIDOR = "server.store";    
+    public static final String KEY_STORE_SERVIDOR = "bancovendedor.store";    
 
     public static final String KEY_STORE_PASSWORD = "123456";
     public static final String TRUST_STORE_CLIENTE = "ecommerce.store";

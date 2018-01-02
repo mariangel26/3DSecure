@@ -7,6 +7,7 @@ package servlet;
 
 import ConexionServidor.HiloPrincipalServidor;
 import DAO.DAOCliente;
+import Factura.Factura;
 import Modelo.Cliente;
 import Registro.Registro;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +41,7 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, 
             HttpServletResponse response) throws IOException{
         response.setContentType("text/html;charset=UTF-8");
-        
+        /*
         //SE VERIFICA EL CAPTCHA
             String remoteAddr = request.getRemoteAddr();
             ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
@@ -56,10 +57,10 @@ public class login extends HttpServlet {
                response.sendRedirect("index.jsp");
             }
            
-        
+        */
         String user = request.getParameter("user");
         String pass = request.getParameter("pass");
-        
+        /*
         //Consultas con = new Consultas();
         if((user != "") && (pass != "")){
             
@@ -68,42 +69,128 @@ public class login extends HttpServlet {
             Cliente cliente = DAO.buscarCuenta(user);
         
             if(cliente == null){
+                System.out.println("EL CLIENTE NO ES NULL");
                 
                 out.println("EL USUARIO NO EXISTE");
                 response.sendRedirect("index.jsp");
 
             }else if(cliente != null && cliente.getIntentos() < 3){
+                System.out.println("EL CLIENTE NO ES NULL Y SUS INTENTOS SON MENORES A 3");
                 if(cliente.getContrasena().equals(hash.toString())){
+                    System.out.println("LAS CLAVES COINCIDEN");
                     response.sendRedirect("welcome.jsp");
                 }else{
+                    System.out.println("LAS CLAVES NO COINCIDEN");
                     cliente.setIntentos(cliente.getIntentos()+1);
                     DAO.actualizarCliente(cliente);
                     response.sendRedirect("index.jsp");
                 }
             }else if (cliente != null && cliente.getIntentos() >= 3){
+                System.out.println("EL CLIENTE NO ES NULL PERO LOS INTENTOS SON MAAYORES A 3");
                 response.sendRedirect("index.jsp");
             }
+        }*/
+        
+        if(capchaCorrecto(request) && clienteNoEsNull(user) && 
+                intentosMenorA3(user) && claveIgual(user,pass)){
+            //se reincia la cantidad de intentos del usuario
+            DAOCliente DAO = new DAOCliente();
+            Cliente cliente = DAO.buscarCuenta(user);
+            cliente.setIntentos(0);
+            DAO.actualizarCliente(cliente);
+            response.sendRedirect("welcome.jsp");
+        }else{
+            response.sendRedirect("index.jsp");
         }
         
-        
-        /*Este codigo se debe de pasar ala parte donde el usuario ingrese sus datos personales de banco
-        de la pagina del banco*/
-        //new HiloPrincipalServidor(response).recibir();//prueba de creacion del servidor
-        //response.sendRedirect("welcome.jsp");
-        /*System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            Socket client;
-            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-            ObjectOutputStream salidaObjeto;      
-            //Se colocan los datos del nodo (Direccion IP y Puerto).
-            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
-            salidaObjeto.writeObject("25253393;4532314510308244;10;2021;218;oswaldo;lopez;350");
-            salidaObjeto.close();
-            client.close();
-            */
+        //new HiloPrincipalServidor(response).recibir("Oswal Lopez","25253393","Donas","3","350","1050");
+        //response.sendRedirect("index.jsp");
         
     }
-    
+    /**
+     * metodo que se encarga de validar si el usuario existe o no.
+     * @param user nombre de usuario ingresado por el usuario
+     * @return true si el usuario existe, false en caso contrario
+     */
+    public Boolean clienteNoEsNull(String user){
+        Boolean respuesta = true;
+        DAOCliente DAO = new DAOCliente();
+        Cliente cliente = DAO.buscarCuenta(user);
+        if(cliente == null){
+            System.out.println("El usuario no existe!");
+            respuesta = false;
+        }else{
+            respuesta = true;
+        }
+        return respuesta;
+    }
+    /**
+     * metodo que se encarga de validar si la clave es igual a la ingresada por el usuario.
+     * @param user nombre de usuario ingresado por el usuario
+     * @param clave clave ingresada por el usuario
+     * @return true si las claves coinciden, false en caso contrario
+     */
+    public Boolean claveIgual(String user,String clave){
+        Boolean respuesta = true;
+        DAOCliente DAO = new DAOCliente();
+        Cliente cliente = DAO.buscarCuenta(user);
+        if(cliente.getContrasena().equals(toHash(clave).toString())){
+            respuesta = true;
+        }else{
+            System.out.println("El usuario ingreso una clave erronea!");
+            cliente.setIntentos(cliente.getIntentos()+1);
+            DAO.actualizarCliente(cliente);
+            respuesta = false;
+        }
+        return respuesta;
+    }
+    /**
+     * Metodo que se encarga de verificar si el usuario ya se ha equivocado en la clave
+     * 3 veces 
+     * @param user nombre de usuario ingresado por el usuario
+     * @return true si el usuario ha intentado menos de 3 veces el inicio de sesion 
+     */
+    public Boolean intentosMenorA3(String user){
+        Boolean respuesta = true;
+        DAOCliente DAO = new DAOCliente();
+        Cliente cliente = DAO.buscarCuenta(user);
+        if(cliente.getIntentos() < 3){
+            respuesta = true;
+        }else{
+            System.out.println("El usuario tiene la cuenta bloqueada");
+            respuesta = false;
+        }
+        return respuesta;
+    }
+    /**
+     * metodo que se encarga de verificar si el capcha ingresado por el usuario 
+     * es correcto.
+     * @param request
+     * @return true si coincide, false en caso contrario.
+     */
+    public Boolean capchaCorrecto(HttpServletRequest request){
+        Boolean respuesta = true;
+        String remoteAddr = request.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+       if (reCaptchaResponse.isValid()) {
+           respuesta = true;
+        } else {
+           System.out.println("el capcha es incorrecto");
+           respuesta = false;
+        }
+        return respuesta;
+    }
+    /**
+     * metodo que se encarga de convertir a hash la clave ingresada por el usuario.
+     * @param clave clave a convertir.
+     * @return la clave convertida.
+     */
     private Integer toHash(String clave){
         Integer hash = 512;
         hash =  37*hash + clave.hashCode();
