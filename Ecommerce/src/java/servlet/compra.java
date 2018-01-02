@@ -90,11 +90,10 @@ public class compra extends HttpServlet {
                
                
                if(mensajeDelServer.equals("ACEPTADO")){
-                   response.sendRedirect("welcome.jsp");
                    //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
-                   //new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
-                   //        cedula,nombreProducto,cantidad,auxiliarPrecio,
-                   //        precio.toString());
+                   new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
+                           cedula,nombreProducto,cantidad,auxiliarPrecio,
+                           precio.toString());
                }else{
                    request.setAttribute("precio", auxiliarPrecio);
                    request.setAttribute("nombreP", nombreProducto);

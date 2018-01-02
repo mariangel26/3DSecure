@@ -9,14 +9,18 @@ import DAO.DAOVendedor;
 import Modelo.Vendedor;
 import Registro.Registro;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.security.KeyStore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 
 /**
@@ -44,6 +48,7 @@ public class HiloProcesa extends Thread {
                 String[] split = mensaje.split(";");
                 if(split[0].equals("ACEPTADO")){
                     actualizarDineroVendedor(Long.parseLong(split[1]));
+                    HiloProcesa.enviarAeCommerce(split[0]);
                 }
                 //HiloProcesa.enviarAeCommerce(split[0]);
             
@@ -57,10 +62,31 @@ public class HiloProcesa extends Thread {
     public static void enviarAeCommerce(String mensaje){
         
         try {
-            System.setProperty("javax.net.ssl.trustStore", "ecommerce.store");
-            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
+            
+            //ESCOJO EL PROTOCOLO QUE SE VA A UTILIZAR
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            
+            //TIPO DE KEYSTORE
+            KeyStore ks = KeyStore.getInstance("jceks");
+
+            //CARGANDO EL KEYSTORE DEL SERVIDOR
+            ks.load(new FileInputStream(Registro.KEY_STORE_SERVIDOR), null);
+            
+            //ESTABLECIENDO EL TIPO DE CERTIFICADO
+            KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+            kf.init(ks, Registro.KEY_STORE_PASSWORD.toCharArray());
+            
+            //INICIALIZA EL CONTEXTO
+            context.init(kf.getKeyManagers(), null, null);
+            
+            //INICIALIZANDO LA FABRICA PARA EL SOCKET
+            SSLSocketFactory clientFactory = context.getSocketFactory();
+            
+            //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
             Socket client;
-            client = clientFactory.createSocket("localhost", Registro.PUERTO_CONEXION_CLIENTE);
+            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
+            
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());

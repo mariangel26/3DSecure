@@ -61,14 +61,10 @@ public class HiloProcesaServidor extends Thread {
                     if(datosCorrectos(mensaje)){
                        
                         salidaObjeto.writeObject("ACEPTADO");
+                        HiloProcesaServidor.enviarABancoVendedor(mensaje);
                         
-                        //envio
-                       // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
-                       //HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;2021;218;oswaldo;lopez;3500");
                     }else{
                         salidaObjeto.writeObject("RECHAZADO");
-                        HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;2021;218;oswaldo;lopez;3500");
-                        //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
                     }   
                     
                 
@@ -88,7 +84,8 @@ public class HiloProcesaServidor extends Thread {
         }
     }
     
-    public static void enviarABancoVendedor(String mensaje) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableKeyException, KeyManagementException{
+    public static void enviarABancoVendedor(String mensaje) throws NoSuchAlgorithmException, KeyStoreException,
+            CertificateException, UnrecoverableKeyException, KeyManagementException{
         
         try {
             String[] split = mensaje.split(";");
@@ -144,7 +141,6 @@ public class HiloProcesaServidor extends Thread {
         String[] split = mensaje.split(";");
         DAOCliente dao = new DAOCliente();
         Cliente cliente = dao.buscarCedula(Integer.parseInt(split[0]));
-        //"25253393;4532314510308244;10;21;218;oswaldo;lopez;350000"
       if(cliente != null) {
         if((cliente.getCedulaCliente() == Integer.parseInt(split[0])) &&
              (cliente.getTarjetaCliente() == Long.parseLong(split[1])) &&

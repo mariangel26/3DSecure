@@ -22,6 +22,7 @@ import javax.net.ssl.SSLSocketFactory;
 /**
  * Para la conexion nos guiamos de las siguientes paginas web
  * https://www.programcreek.com/java-api-examples/javax.net.ssl.SSLServerSocket
+ * http://codyaray.com/2013/04/java-ssl-with-multiple-keystores
  * @author mariangel
  */
 public class EnvioBancoCliente {

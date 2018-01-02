@@ -26,6 +26,8 @@ import javax.net.ssl.SSLServerSocketFactory;
 /**
  * Para la conexion nos guiamos de las siguientes paginas web
  * https://www.programcreek.com/java-api-examples/javax.net.ssl.SSLServerSocket
+ * http://codyaray.com/2013/04/java-ssl-with-multiple-keystores
+ * https://www.programcreek.com/java-api-examples/javax.net.ssl.KeyManagerFactory
  * @author oswalm
  */
 public class HiloPrincipalServidor extends Thread{
