@@ -8,12 +8,21 @@ package ConexionServidor;
 import DAO.DAOCliente;
 import Modelo.Cliente;
 import Registro.Registro;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 
 /**
@@ -57,8 +66,8 @@ public class HiloProcesaServidor extends Thread {
                        // HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;21;218;oswaldo;lopez;350000");
                        //HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;2021;218;oswaldo;lopez;3500");
                     }else{
-                        System.out.println("ENTRE EN EL ELSE WE");
                         salidaObjeto.writeObject("RECHAZADO");
+                        HiloProcesaServidor.enviarABancoVendedor("25253393;4532314510308244;10;2021;218;oswaldo;lopez;3500");
                         //LOGICA PARA RESPONDERLE A LA PAGINA QUE LOS DATOS SON INCORRECTOS
                     }   
                     
@@ -79,16 +88,35 @@ public class HiloProcesaServidor extends Thread {
         }
     }
     
-    public static void enviarABancoVendedor(String mensaje){
+    public static void enviarABancoVendedor(String mensaje) throws NoSuchAlgorithmException, KeyStoreException, CertificateException, UnrecoverableKeyException, KeyManagementException{
         
         try {
             String[] split = mensaje.split(";");
-            //System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
             System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
-            SSLSocketFactory clientFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            
+            //ESCOJO EL PROTOCOLO QUE SE VA A UTILIZAR
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            
+            //TIPO DE KEYSTORE
+            KeyStore ks = KeyStore.getInstance("jceks");
+
+            //CARGANDO EL KEYSTORE DEL SERVIDOR
+            ks.load(new FileInputStream(Registro.KEY_STORE_SERVIDOR), null);
+            
+            //ESTABLECIENDO EL TIPO DE CERTIFICADO
+            KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+            kf.init(ks, Registro.KEY_STORE_PASSWORD.toCharArray());
+            
+            //INICIALIZA EL CONTEXTO
+            context.init(kf.getKeyManagers(), null, null);
+            
+            //INICIALIZANDO LA FABRICA PARA EL SOCKET
+            SSLSocketFactory clientFactory = context.getSocketFactory();
+            
+            //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
             Socket client;
             client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE);
-            //client = clientFactory.createSocket("localhost", 4000);
+            
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).
             salidaObjeto = new ObjectOutputStream(client.getOutputStream());
