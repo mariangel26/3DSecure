@@ -21,7 +21,7 @@ public class Registro {
     //DATOS PARA SSL
     public static final String KEY_STORE_SERVIDOR = "bancocliente.store";
     public static final String KEY_STORE_PASSWORD = "123456";
-    public static final String TRUST_STORE_CLIENTE = "server.store";
+    public static final String TRUST_STORE_CLIENTE = "bancovendedor.store";
     public static final String TRUST_STORE_PASSWORD = "123456";
     
 }

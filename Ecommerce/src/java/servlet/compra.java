@@ -20,6 +20,11 @@ import ConexionCliente.*;
 import ConexionServidor.HiloPrincipalServidor;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -85,11 +90,10 @@ public class compra extends HttpServlet {
                
                
                if(mensajeDelServer.equals("ACEPTADO")){
-                   response.sendRedirect("welcome.jsp");
                    //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
-                   //new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
-                   //        cedula,nombreProducto,cantidad,auxiliarPrecio,
-                   //        precio.toString());
+                   new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
+                           cedula,nombreProducto,cantidad,auxiliarPrecio,
+                           precio.toString());
                }else{
                    request.setAttribute("precio", auxiliarPrecio);
                    request.setAttribute("nombreP", nombreProducto);
@@ -111,6 +115,16 @@ public class compra extends HttpServlet {
                 System.out.println("uno de los campos esta vacio");
                 response.sendRedirect("Compra.jsp");
             }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyStoreException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CertificateException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnrecoverableKeyException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyManagementException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
