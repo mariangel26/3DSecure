@@ -40,16 +40,6 @@
     <respuestaSecreta>z</respuestaSecreta>
   </Cliente>
   <Cliente>
-    <nombreUsuario>oswalm</nombreUsuario>
-    <contrasena>1400612471</contrasena>
-    <nombre>oswaldo</nombre>
-    <apellido>Lopez</apellido>
-    <correo>oswaldo7365@hotmail.com</correo>
-    <intentos>3</intentos>
-    <preguntaSecreta>Pregunta</preguntaSecreta>
-    <respuestaSecreta>Respuesta</respuestaSecreta>
-  </Cliente>
-  <Cliente>
     <nombreUsuario>h</nombreUsuario>
     <contrasena>1400612471</contrasena>
     <nombre>h</nombre>
@@ -68,5 +58,15 @@
     <intentos>0</intentos>
     <preguntaSecreta>A</preguntaSecreta>
     <respuestaSecreta>A</respuestaSecreta>
+  </Cliente>
+  <Cliente>
+    <nombreUsuario>oswalm</nombreUsuario>
+    <contrasena>1400612471</contrasena>
+    <nombre>oswaldo</nombre>
+    <apellido>Lopez</apellido>
+    <correo>oswaldo7365@hotmail.com</correo>
+    <intentos>0</intentos>
+    <preguntaSecreta>Pregunta</preguntaSecreta>
+    <respuestaSecreta>Respuesta</respuestaSecreta>
   </Cliente>
 </root>

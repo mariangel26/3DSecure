@@ -5,9 +5,9 @@
     <cedulaCliente>2</cedulaCliente>
     <correoCliente>oswaldo@hotmail.com</correoCliente>
     <tarjetaCliente>2</tarjetaCliente>
-    <dineroDisponible>88150</dineroDisponible>
-    <mesCaduciodad>2</mesCaduciodad>
-    <anoCaduciodad>2</anoCaduciodad>
+    <dineroDisponible>8798550</dineroDisponible>
+    <mesCaduciodad>02</mesCaduciodad>
+    <anoCaduciodad>0002</anoCaduciodad>
     <codigoSeguridad>2</codigoSeguridad>
   </Cliente>
 </root>
