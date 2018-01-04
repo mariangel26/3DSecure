@@ -55,7 +55,7 @@ public class singUp extends HttpServlet {
  
         if((nombre != "")&&(apellido != "")&&(correo != "")&&
                 (user != "")&&(password != "")){
-            if((verificarContrasena(password)) &&(reCaptchaResponse.isValid())){
+            if((clienteEsNull(user)) && (verificarContrasena(password)) &&(reCaptchaResponse.isValid())){
                 Integer hash = toHash(password);
                 Cliente cliente = new Cliente (nombre,apellido,user,
                         hash.toString(),correo,0,pregunta,respuesta);
@@ -121,6 +121,25 @@ public class singUp extends HttpServlet {
             respuesta = false;
         }
         
+        return respuesta;
+    }
+    
+    /**
+     * metodo que se encarga de validar si el usuario existe o no.
+     * @param user nombre de usuario ingresado por el usuario
+     * @return true si el usuario existe, false en caso contrario
+     */
+    public Boolean clienteEsNull(String user){
+        Boolean respuesta = true;
+        DAOCliente DAO = new DAOCliente();
+        Cliente cliente = DAO.buscarCuenta(user);
+        if(cliente == null){
+            
+            respuesta = true;
+        }else{
+            System.out.println("El usuario existe!");
+            respuesta = false;
+        }
         return respuesta;
     }
 

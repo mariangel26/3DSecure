@@ -9,6 +9,8 @@ import DAO.DAOCliente;
 import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,42 +38,33 @@ public class olvidoContrasena extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String user; 
+            user = request.getParameter("usuario");
+            System.out.println("el user en java es "+user);
+            String respuesta = request.getParameter("respuesta");
+            String contrasena = request.getParameter("contrasena");
+           
         
-        String user = request.getParameter("user");
-        String pregunta = request.getParameter("pregunta");
-        String respuesta = request.getParameter("respuesta");
-        String contrasena = request.getParameter("contrasena");
-        //SE VERIFICA EL CAPTCHA
-            String remoteAddr = request.getRemoteAddr();
-            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-            reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
-            
-            String challenge = request.getParameter("recaptcha_challenge_field");
-            String uresponse = request.getParameter("recaptcha_response_field");
-            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-        
-        if(user != "" && respuesta != "" && pregunta != ""){
-            DAOCliente dao = new DAOCliente(); 
-            Cliente cliente = dao.buscarCuenta(user);
-            if(cliente != null){
-                if(cliente.getPreguntaSecreta().equals(pregunta) && 
-                        cliente.getRespuestaSecreta().equals(respuesta) &&
-                        verificarContrasena(contrasena) && reCaptchaResponse.isValid()){
+        if(contrasena != "" && respuesta != "" ){
+            if(verificarRespuesta(user, respuesta, response)){
+                if(capchaCorrecto(request) && verificarContrasena(contrasena)){
                     Integer hash = toHash(contrasena);
+                    DAOCliente dao = new DAOCliente(); 
+                    Cliente cliente = dao.buscarCuenta(user);
                     cliente.setIntentos(0);
                     cliente.setContrasena(hash.toString());
                     dao.actualizarCliente(cliente);
-                    response.sendRedirect("welcome.jsp");
+                    response.sendRedirect("index.jsp");
                 }else{
-                    System.out.println("La contrasena no es valida o las vergas no se parecen");
-                    response.sendRedirect("olvidoContrasena.jsp");
-
+                    response.sendRedirect("olvidarContrasenaIngresarNombre.jsp");
                 }
-            }else {
-                System.out.println("El cliente es null");
-                response.sendRedirect("olvidoContrasena.jsp");
             }
+            
+        }else{
+           response.sendRedirect("olvidarContrasenaIngresarNombre.jsp");
+
         }
+        
     }
     
     /**
@@ -125,6 +118,47 @@ public class olvidoContrasena extends HttpServlet {
             respuesta = false;
         }
         
+        return respuesta;
+    }
+    
+    /**
+     * metodo que se encarga de verificar si el capcha ingresado por el usuario 
+     * es correcto.
+     * @param request
+     * @return true si coincide, false en caso contrario.
+     */
+    public Boolean capchaCorrecto(HttpServletRequest request){
+        Boolean respuesta = true;
+        String remoteAddr = request.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+       if (reCaptchaResponse.isValid()) {
+           respuesta = true;
+        } else {
+           System.out.println("el capcha es incorrecto");
+           respuesta = false;
+        }
+        return respuesta;
+    }
+    
+    public boolean verificarRespuesta(String usuario,String respuestaSecreta, HttpServletResponse response){
+        boolean respuesta = true;
+        if(respuestaSecreta.equals(new DAOCliente().buscarCuenta(usuario).getRespuestaSecreta())){
+            respuesta = true;
+        }else{
+            System.out.println("La respuesta no coinciden!");
+            respuesta = false;
+            try {
+                response.sendRedirect("respuestasNoCoinciden.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(olvidoContrasena.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return respuesta;
     }
 

@@ -80,8 +80,8 @@ public class verificarCompra extends HttpServlet {
             
                   EnvioBancoCliente evc = new EnvioBancoCliente();
                 
-                    String mensaje = cedula+";"+tarjeta+";"+mes+";"+year+";"
-                           +nseguridad+";"+nombre+";"+apellido+";"+precio+";";
+                    String mensaje = cedula+";"+toHash(tarjeta)+";"+toHash(mes)+";"+toHash(year)+";"
+                      +toHash(nseguridad)+";"+nombre+";"+apellido+";"+precio+";";
 
                      System.out.println("mensaje "+mensaje);
 
@@ -127,6 +127,19 @@ public class verificarCompra extends HttpServlet {
             Logger.getLogger(verificarCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    /**
+     * metodo que se encarga de convertir a hash la clave ingresada por el usuario.
+     * @param clave clave a convertir.
+     * @return la clave convertida.
+     */
+    private Integer toHash(String clave){
+        Integer hash = 512;
+        hash =  37*hash + clave.hashCode();
+        return hash;
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

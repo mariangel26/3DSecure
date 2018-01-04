@@ -94,8 +94,7 @@ public class HiloPrincipalServidor extends Thread{
            //Mensaje que llega:
             String mensaje = (String)ois.readObject();
             if(mensaje.equals("ACEPTADO")){
-                //Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
-                
+                Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("CompraExitosa.jsp").forward(request, response);
 

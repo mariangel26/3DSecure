@@ -203,10 +203,22 @@ public class HiloProcesaServidor extends Thread {
              (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) &&
              (cliente.getNombreCliente().equals(split[5])) &&
              (cliente.getApellidoCliente().equals(split[6]))){
-            
+            System.out.println((cliente.getCedulaCliente() == Integer.parseInt(split[0])) +" "+
+             (cliente.getTarjetaCliente() == Long.parseLong(split[1])) +" "+
+             (cliente.getMesCaduciodad().equals(split[2])) +" "+
+             (cliente.getAnoCaduciodad().equals(split[3])) +" "+
+             (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) +" "+
+             (cliente.getNombreCliente().equals(split[5])) +" "+
+             (cliente.getApellidoCliente().equals(split[6])));
             correcto = true;
           }else{
-            
+            System.out.println((cliente.getCedulaCliente() == Integer.parseInt(split[0])) +" "+
+             (cliente.getTarjetaCliente() == Long.parseLong(split[1])) +" "+
+             (cliente.getMesCaduciodad().equals(split[2])) +" "+
+             (cliente.getAnoCaduciodad().equals(split[3])) +" "+
+             (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) +" "+
+             (cliente.getNombreCliente().equals(split[5])) +" "+
+             (cliente.getApellidoCliente().equals(split[6])));
             correcto = false;
           }
       }else{

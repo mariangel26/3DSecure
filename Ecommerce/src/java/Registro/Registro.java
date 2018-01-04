@@ -17,8 +17,8 @@ public class Registro {
     public static final String UBICACION_ARCHIVO_XML_PRODUCTO= "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\src\\java\\XML\\Producto.xml";
     
     //DATOS PARA LOS TXT DE LA FACTURA
-    public static final String UBICACION_ARCHIVO_FACTURAS = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/Facturas/";
-    
+    //public static final String UBICACION_ARCHIVO_FACTURAS = "/home/oswalm/Documentos/repositorios/3DSecure/Ecommerce/Facturas/";
+    public static final String UBICACION_ARCHIVO_FACTURAS = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\Ecommerce\\Facturas";
 
     //DATOS PARA SOCKET
     public static final Integer PUERTO_CONEXION_CLIENTE = 3000;
