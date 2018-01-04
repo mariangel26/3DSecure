@@ -47,7 +47,7 @@ public class compra extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        
             /* TODO output your page here. You may use following sample code. */
              String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
@@ -76,35 +76,26 @@ public class compra extends HttpServlet {
         if((cantidad!="")&&(nombre != "")&&(apellido != "")&&(cedula != "")&&
             (tarjeta != "")&&(nseguridad != "")&&(fecha != "")){
             if((reCaptchaResponse.isValid())){
-                
-                EnvioBancoCliente evc = new EnvioBancoCliente();
+                   
                 String mes, year;
+                System.out.println("fecha "+fecha);
                 String[] split = fecha.split("-");
                 mes = split[1];
                 year = split [0];
-                String mensaje = cedula+";"+tarjeta+";"+mes+";"+year+";"
-                      +nseguridad+";"+nombre+";"+apellido+";"+precio.toString()+";";
                 
-               //ENVIO DATOS AL BANCO CLIENTE
-               String mensajeDelServer = evc.enviarABancoCliente(mensaje);
-               
-               
-               if(mensajeDelServer.equals("ACEPTADO")){
-                   //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
-                   new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
-                           cedula,nombreProducto,cantidad,auxiliarPrecio,
-                           precio.toString());
-               }else{
-                   request.setAttribute("precio", auxiliarPrecio);
-                   request.setAttribute("nombreP", nombreProducto);
-                   request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
- 
-                   response.sendRedirect("datosIncorrectos.jsp");
-               }
-                   
+                request.setAttribute("cedula", cedula);
+                request.setAttribute("tarjeta", tarjeta);
+                request.setAttribute("mes", mes);
+                request.setAttribute("year", year);
+                request.setAttribute("nseguridad", nseguridad);
+                request.setAttribute("nombre", nombre);
+                request.setAttribute("apellido", apellido);
+                request.setAttribute("precio", precio);
+                request.setAttribute("nombreP", nombreProducto);
+                request.setAttribute("auxiliar", auxiliarPrecio);
+                request.setAttribute("cantidad", cantidad);
                 
-               
-               
+                request.getRequestDispatcher("verificarCompra.jsp").forward(request, response);               
                 
             }else{
                 System.out.println("El capcha no es correcto");
@@ -115,17 +106,7 @@ public class compra extends HttpServlet {
                 System.out.println("uno de los campos esta vacio");
                 response.sendRedirect("Compra.jsp");
             }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (KeyStoreException ex) {
-            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CertificateException ex) {
-            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnrecoverableKeyException ex) {
-            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (KeyManagementException ex) {
-            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
