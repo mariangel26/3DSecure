@@ -1,3 +1,4 @@
+
 <%@page import="DAO.DAOProducto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Modelo.Producto"%>
@@ -112,13 +113,16 @@ span {
     DAOProducto dao = new DAOProducto();
     ArrayList<Producto> producto = new ArrayList<Producto>();
     String precio;
+   
   %>
   
   
 <div class="wrapper">
      <h1>So Awesome</h1>
- <span><i class="shopping-cart"></i></span>
-
+     
+     <span><i class="shopping-cart"></i></span>
+ 
+ 
     <div class="clear"></div>
     <!-- items -->
     <div class="items">
@@ -134,7 +138,8 @@ span {
              
                 <p>Precio: <%= pr.getPrecioProducto()%></p>    
             
-                <a href="Compra.jsp?precio=<%out.print(pr.getPrecioProducto());%>&nombreP=<%out.print(pr.getNombreProducto());%>">
+                <a href="Compra.jsp?precio=<%out.print(pr.getPrecioProducto());%>&nombreP=<%out.print(pr.getNombreProducto());%>&user=<%out.print(request.getParameter("user"));%>">
+                   
                     <button class="add-to-cart" type="submit" name='comprar'> Comprar </button>
                 </a>  
                

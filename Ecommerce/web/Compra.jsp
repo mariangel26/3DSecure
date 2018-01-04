@@ -10,9 +10,10 @@
     <form class='login-form' action="compra" method="post" onsubmit="return validar()">
     <div>
         <%
-            String precio, nombreP; 
+            String precio, nombreP, user; 
             precio = request.getParameter("precio");
             nombreP = request.getParameter("nombreP");
+            user = request.getParameter("user");
         %>
         <center>
          <a>
@@ -31,6 +32,7 @@
     </div>
         <input type="hidden" value="<%=precio%>" name="precio">
         <input type="hidden" value="<%=nombreP%>" name="nombreP">
+        <input type="hidden" value="<%=user%>" name="user">
     
     <div class="flex-row">
     <label class="lf--label" for="cantidad">

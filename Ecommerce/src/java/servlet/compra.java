@@ -58,8 +58,10 @@ public class compra extends HttpServlet {
         String cantidad = request.getParameter("cantidad");
         String auxiliarPrecio = request.getParameter("precio");
         String nombreProducto = request.getParameter("nombreP");
+        String user = request.getParameter("user");
         Integer precio = Integer.parseInt(auxiliarPrecio);
         Integer auxiliarCantidad = Integer.parseInt(cantidad);
+        
         
         //MULTIPLICACION DE LA CANTIDAD
             precio = (auxiliarCantidad * precio);
@@ -78,11 +80,14 @@ public class compra extends HttpServlet {
             if((reCaptchaResponse.isValid())){
                    
                 String mes, year;
-                System.out.println("fecha "+fecha);
                 String[] split = fecha.split("-");
                 mes = split[1];
                 year = split [0];
-                
+                System.out.println("user "+user);
+                DAOCliente DAO = new DAOCliente();
+                Cliente cliente = DAO.buscarCuenta(user);
+            
+                request.setAttribute("pregunta", cliente.getPreguntaSecreta());
                 request.setAttribute("cedula", cedula);
                 request.setAttribute("tarjeta", tarjeta);
                 request.setAttribute("mes", mes);
@@ -94,6 +99,7 @@ public class compra extends HttpServlet {
                 request.setAttribute("nombreP", nombreProducto);
                 request.setAttribute("auxiliar", auxiliarPrecio);
                 request.setAttribute("cantidad", cantidad);
+                request.setAttribute("user", user);
                 
                 request.getRequestDispatcher("verificarCompra.jsp").forward(request, response);               
                 

@@ -7,6 +7,8 @@ package servlet;
 
 import ConexionCliente.EnvioBancoCliente;
 import ConexionServidor.HiloPrincipalServidor;
+import DAO.DAOCliente;
+import Modelo.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.KeyManagementException;
@@ -56,7 +58,14 @@ public class verificarCompra extends HttpServlet {
             String precio = request.getParameter("precio");
             String auxiliarPrecio = request.getParameter("auxiliar");
             String cantidad = request.getParameter("cantidad");
-            String pregunta = request.getParameter("pregunta");
+            String user = request.getParameter("user");
+            String respuesta = request.getParameter("respuesta");
+            
+            DAOCliente DAO = new DAOCliente();
+            Cliente cliente = DAO.buscarCuenta(user);
+        
+            
+            
              //SE VERIFICA EL CAPTCHA
             String remoteAddr = request.getRemoteAddr();
             ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
@@ -66,35 +75,42 @@ public class verificarCompra extends HttpServlet {
             String uresponse = request.getParameter("recaptcha_response_field");
             ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
             
-            if ((reCaptchaResponse.isValid()) && (!"".equals(pregunta))){
-                
-              EnvioBancoCliente evc = new EnvioBancoCliente();
-                
-               String mensaje = cedula+";"+tarjeta+";"+mes+";"+year+";"
-                      +nseguridad+";"+nombre+";"+apellido+";"+precio+";";
-               
-                System.out.println("mensaje "+mensaje);
- 
-              //ENVIO DATOS AL BANCO CLIENTE
-               String mensajeDelServer = evc.enviarABancoCliente(mensaje);
-               
-               
-               if(mensajeDelServer.equals("ACEPTADO")){
-                   //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
-                   new HiloPrincipalServidor(response).recibir(nombre+" "+apellido,
-                           cedula,nombreProducto,cantidad,auxiliarPrecio,
-                           precio);
-               }else{
-                   request.setAttribute("precio", auxiliarPrecio);
-                   request.setAttribute("nombreP", nombreProducto);
-                   request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
-               }
+            if ((reCaptchaResponse.isValid()) && (!"".equals(respuesta))){
+               if (respuesta.equals(cliente.getRespuestaSecreta())){
             
-            }else{
-                System.out.println("me equivoque");
+                  EnvioBancoCliente evc = new EnvioBancoCliente();
+                
+                    String mensaje = cedula+";"+tarjeta+";"+mes+";"+year+";"
+                           +nseguridad+";"+nombre+";"+apellido+";"+precio+";";
+
+                     System.out.println("mensaje "+mensaje);
+
+                   //ENVIO DATOS AL BANCO CLIENTE
+                    String mensajeDelServer = evc.enviarABancoCliente(mensaje);
+
+
+                    if(mensajeDelServer.equals("ACEPTADO")){
+                        //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
+                        new HiloPrincipalServidor(response,request).recibir(nombre+" "+apellido,
+                                cedula,nombreProducto,cantidad,auxiliarPrecio,
+                                precio,user);
+                    }else{
+                        request.setAttribute("precio", auxiliarPrecio);
+                        request.setAttribute("nombreP", nombreProducto);
+                        request.setAttribute("user", user);
+                        request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
+                    }
+
+                 }else{
+                     System.out.println("me equivoque");
+                     response.sendRedirect("verificarCompra.jsp");
+                 }
+             
+         }else{
+                System.out.println("Esta vacio o captcha malo");
                 response.sendRedirect("verificarCompra.jsp");
-            }
-            
+         }
+              
             
             
         } catch (ClassNotFoundException ex) {

@@ -15,7 +15,7 @@
        <form class='login-form' action="verificarCompra" method="post">
   <div class="flex-row">
       <h2 id="pregunta" class='lf--input' name="pregunta">
-          PREGUNTA SECRETA
+          ¿<%= request.getAttribute("pregunta") %>?
       </h2>
   </div>
   <div class="flex-row">
@@ -26,7 +26,7 @@
         </g>
       </svg>
     </label>
-    <input id="pregunta" class='lf--input' placeholder='Respuesta Secreta' type='text' name="pregunta">   
+    <input id="respuesta" class='lf--input' placeholder='Respuesta Secreta' type='text' name="respuesta">   
   </div>
         
   <div>
@@ -52,6 +52,7 @@
   <input type="hidden" name="nombreP" value="<%= request.getAttribute("nombreP") %>">
   <input type="hidden" name="auxiliar" value="<%= request.getAttribute("auxiliar") %>">
   <input type="hidden" name="cantidad" value="<%= request.getAttribute("cantidad") %>">
+   <input type="hidden" name="user" value="<%= request.getAttribute("user") %>">
 </form>
   
     

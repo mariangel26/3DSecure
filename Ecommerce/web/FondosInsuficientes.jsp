@@ -7,6 +7,7 @@
        <link href="css/style.css" rel="stylesheet" type="text/css"/>
     <form class='login-form-datos' action="welcome.jsp" method="post">
         <center><h1 class="big-text">FONDOS INSUFICIENTES</h1></center>
+        <input type="hidden" name="user" value="<%= request.getAttribute("user") %>">
         <input class='lf--submit' type='submit' value='ESTA BIEN' name="ok">
   
 </form>

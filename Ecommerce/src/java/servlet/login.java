@@ -39,7 +39,7 @@ public class login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, 
-            HttpServletResponse response) throws IOException{
+            HttpServletResponse response) throws IOException, ServletException{
         response.setContentType("text/html;charset=UTF-8");
         /*
         //SE VERIFICA EL CAPTCHA
@@ -98,6 +98,9 @@ public class login extends HttpServlet {
             Cliente cliente = DAO.buscarCuenta(user);
             cliente.setIntentos(0);
             DAO.actualizarCliente(cliente);
+           
+            request.setAttribute("user", cliente.getNombreUsuario());
+            request.getRequestDispatcher("welcome.jsp").forward(request, response);
             response.sendRedirect("welcome.jsp");
         }else{
             response.sendRedirect("index.jsp");

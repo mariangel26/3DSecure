@@ -24,6 +24,8 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -33,8 +35,10 @@ import javax.servlet.http.HttpServletResponse;
 public class HiloPrincipalServidor extends Thread{
 
     public HttpServletResponse response;
-    public HiloPrincipalServidor(HttpServletResponse response) {
+    public HttpServletRequest request;
+    public HiloPrincipalServidor(HttpServletResponse response, HttpServletRequest request) {
         this.response = response;
+        this.request = request;
     
     }
     
@@ -48,9 +52,11 @@ public class HiloPrincipalServidor extends Thread{
    * @param cantidad
    * @param precioDetal
    * @param precioTotal 
+     * @param user 
    */
     
-    public void recibir(String nombreApellido,String cedula,String nombreProducto, String cantidad, String precioDetal,String precioTotal){
+    public void recibir(String nombreApellido,String cedula,String nombreProducto, String cantidad, 
+            String precioDetal,String precioTotal, String user) throws ServletException{
         System.out.println("VENDEDOR COMO Servidor empieza a correr");
         try {
             System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
@@ -89,11 +95,13 @@ public class HiloPrincipalServidor extends Thread{
             String mensaje = (String)ois.readObject();
             if(mensaje.equals("ACEPTADO")){
                 //Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
-                System.out.println("LLEGUE DE VUELTA YAY!");
-                response.sendRedirect("CompraExitosa.jsp");
+                
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("CompraExitosa.jsp").forward(request, response);
 
             }else{
-                response.sendRedirect("FondosInsuficientes.jsp");
+                request.setAttribute("user", user);
+                request.getRequestDispatcher("FondosInsuficientes.jsp").forward(request, response);
             }
             System.out.println("El cliente (EL BANCO DEL VENDEDOR) envio: "+mensaje);
             ois.close();
