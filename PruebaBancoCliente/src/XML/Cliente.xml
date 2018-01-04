@@ -2,12 +2,12 @@
   <Cliente>
     <nombreCliente>oswaldo</nombreCliente>
     <apellidoCliente>lopez</apellidoCliente>
-    <cedulaCliente>2</cedulaCliente>
-    <correoCliente>oswaldo@hotmail.com</correoCliente>
-    <tarjetaCliente>2</tarjetaCliente>
-    <dineroDisponible>8797550</dineroDisponible>
-    <mesCaduciodad>02</mesCaduciodad>
-    <anoCaduciodad>0002</anoCaduciodad>
-    <codigoSeguridad>2</codigoSeguridad>
+    <cedulaCliente>25253393</cedulaCliente>
+    <correoCliente>oswaldo7365@hotmail.com</correoCliente>
+    <tarjetaCliente>-2128649547</tarjetaCliente>
+    <dineroDisponible>399800</dineroDisponible>
+    <mesCaduciodad>20511</mesCaduciodad>
+    <anoCaduciodad>1556221</anoCaduciodad>
+    <codigoSeguridad>68569</codigoSeguridad>
   </Cliente>
 </root>
