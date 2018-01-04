@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import static java.lang.System.out;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLSocketFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -90,18 +92,19 @@ public class login extends HttpServlet {
                 response.sendRedirect("index.jsp");
             }
         }*/
-        
-        if(capchaCorrecto(request) && clienteNoEsNull(user) && 
-                intentosMenorA3(user) && claveIgual(user,pass)){
-            //se reincia la cantidad de intentos del usuario
-            DAOCliente DAO = new DAOCliente();
-            Cliente cliente = DAO.buscarCuenta(user);
-            cliente.setIntentos(0);
-            DAO.actualizarCliente(cliente);
-            response.sendRedirect("welcome.jsp");
-        }else{
-            response.sendRedirect("index.jsp");
+        if(intentosMenorA3(user,response)){
+            if(capchaCorrecto(request) && clienteNoEsNull(user)  && claveIgual(user,pass)){
+                //se reincia la cantidad de intentos del usuario
+                DAOCliente DAO = new DAOCliente();
+                Cliente cliente = DAO.buscarCuenta(user);
+                cliente.setIntentos(0);
+                DAO.actualizarCliente(cliente);
+                response.sendRedirect("welcome.jsp");
+            }else{
+                response.sendRedirect("index.jsp");
+            }
         }
+        
         
         //new HiloPrincipalServidor(response).recibir("Oswal Lopez","25253393","Donas","3","350","1050");
         //response.sendRedirect("index.jsp");
@@ -150,7 +153,7 @@ public class login extends HttpServlet {
      * @param user nombre de usuario ingresado por el usuario
      * @return true si el usuario ha intentado menos de 3 veces el inicio de sesion 
      */
-    public Boolean intentosMenorA3(String user){
+    public Boolean intentosMenorA3(String user,HttpServletResponse response){
         Boolean respuesta = true;
         DAOCliente DAO = new DAOCliente();
         Cliente cliente = DAO.buscarCuenta(user);
@@ -159,6 +162,11 @@ public class login extends HttpServlet {
         }else{
             System.out.println("El usuario tiene la cuenta bloqueada");
             respuesta = false;
+            try {
+                response.sendRedirect("CuentaBloqueada.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return respuesta;
     }

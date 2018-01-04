@@ -45,7 +45,7 @@
   
   <input class='lf--submit' type='submit' value='INICIAR SESION'>
   <center>
-  <a class='lf--signup' href="olvidoContrasena.jsp" type="submit" align='center'>Olvido Contrasena?</a> 
+  <a class='lf--signup' href="olvidarContrasenaIngresarNombre.jsp" type="submit" align='center'>Olvido Contrasena?</a> 
   </center>
   <div>
     <center>

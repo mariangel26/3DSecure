@@ -54,12 +54,12 @@ public class HiloProcesaServidor extends Thread {
                         salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
                 System.out.println("voy a procesar los datos");
                     if(datosCorrectos(mensaje)){
-                        if(HiloProcesaServidor.confirmarCliente(mensaje.split("")[7])){
+                        //if(HiloProcesaServidor.confirmarCliente(mensaje.split("")[7])){
                             salidaObjeto.writeObject("ACEPTADO");
                             HiloProcesaServidor.enviarABancoVendedor(mensaje);
-                        }else{
-                            salidaObjeto.writeObject("RECHAZADO");
-                        }
+                        //}else{
+                        //    salidaObjeto.writeObject("RECHAZADO");
+                        //}
                     }else{
                         salidaObjeto.writeObject("RECHAZADO");
                     }   

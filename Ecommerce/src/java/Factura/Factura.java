@@ -46,7 +46,7 @@ public class Factura {
     public static String obtenerFecha(){
         String fechaActual = "";
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy HHmmss");
         fechaActual = sdf.format(cal.getTime());
         return fechaActual;
     }
