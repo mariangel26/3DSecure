@@ -10,4 +10,15 @@
     <anoCaduciodad>1556221</anoCaduciodad>
     <codigoSeguridad>68569</codigoSeguridad>
   </Cliente>
+  <Cliente>
+    <nombreCliente>2</nombreCliente>
+    <apellidoCliente>2</apellidoCliente>
+    <cedulaCliente>2</cedulaCliente>
+    <correoCliente>oswaldo7365@hotmail.com</correoCliente>
+    <tarjetaCliente>18994</tarjetaCliente>
+    <dineroDisponible>400000</dineroDisponible>
+    <mesCaduciodad>20482</mesCaduciodad>
+    <anoCaduciodad>1496578</anoCaduciodad>
+    <codigoSeguridad>18994</codigoSeguridad>
+  </Cliente>
 </root>
