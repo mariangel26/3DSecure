@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ConexionServidor;
 
 import DAO.DAOCliente;
@@ -59,10 +54,12 @@ public class HiloProcesaServidor extends Thread {
                         salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
                 System.out.println("voy a procesar los datos");
                     if(datosCorrectos(mensaje)){
-                       
-                        salidaObjeto.writeObject("ACEPTADO");
-                        HiloProcesaServidor.enviarABancoVendedor(mensaje);
-                        
+                        if(HiloProcesaServidor.confirmarCliente(mensaje.split("")[7])){
+                            salidaObjeto.writeObject("ACEPTADO");
+                            HiloProcesaServidor.enviarABancoVendedor(mensaje);
+                        }else{
+                            salidaObjeto.writeObject("RECHAZADO");
+                        }
                     }else{
                         salidaObjeto.writeObject("RECHAZADO");
                     }   
@@ -130,6 +127,61 @@ public class HiloProcesaServidor extends Thread {
         
     }
     
+    public static boolean confirmarCliente(String mensaje) throws NoSuchAlgorithmException, KeyStoreException,
+            CertificateException, UnrecoverableKeyException, KeyManagementException{
+        boolean respuesta = true;
+        try {
+            
+            String[] split = mensaje.split(";");
+            System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE_CLIENTE);
+            
+            //ESCOJO EL PROTOCOLO QUE SE VA A UTILIZAR
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            
+            //TIPO DE KEYSTORE
+            KeyStore ks = KeyStore.getInstance("jceks");
+
+            //CARGANDO EL KEYSTORE DEL SERVIDOR
+            ks.load(new FileInputStream(Registro.KEY_STORE_SERVIDOR), null);
+            
+            //ESTABLECIENDO EL TIPO DE CERTIFICADO
+            KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+            kf.init(ks, Registro.KEY_STORE_PASSWORD.toCharArray());
+            
+            //INICIALIZA EL CONTEXTO
+            context.init(kf.getKeyManagers(), null, null);
+            
+            //INICIALIZANDO LA FABRICA PARA EL SOCKET
+            SSLSocketFactory clientFactory = context.getSocketFactory();
+            
+            //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
+            Socket client;
+            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE_CLIENTE);
+            
+            ObjectOutputStream salidaObjeto;      
+            //Se colocan los datos del nodo (Direccion IP y Puerto).
+            salidaObjeto = new ObjectOutputStream(client.getOutputStream());
+            salidaObjeto.writeObject(mensaje);
+            
+            ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
+            //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
+            //Mensaje que llega:
+            String recibo = (String)ois.readObject();
+            if(recibo.equals("ACEPTADO")){
+                respuesta = true;
+            }else{
+                respuesta = false;
+            }
+            salidaObjeto.close();
+            client.close();
+        } catch (IOException ex) {
+            Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(HiloProcesaServidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+    
     /**
      * Metodo que se encarga de verificar los datos del cliente que la pagina 
      * envio al banco Cliente
@@ -147,10 +199,12 @@ public class HiloProcesaServidor extends Thread {
              (cliente.getMesCaduciodad().equals(split[2])) &&
              (cliente.getAnoCaduciodad().equals(split[3])) &&
              (cliente.getCodigoSeguridad() == Integer.parseInt(split[4])) &&
-             (cliente.getNombreCliente().equals(split[5]) &&
-             (cliente.getApellidoCliente().equals(split[6])))){
+             (cliente.getNombreCliente().equals(split[5])) &&
+             (cliente.getApellidoCliente().equals(split[6]))){
+            
             correcto = true;
           }else{
+            
             correcto = false;
           }
       }else{
