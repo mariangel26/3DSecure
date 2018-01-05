@@ -98,7 +98,7 @@
       </div>
     <center>
     <%
-    ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LcNwj4UAAAAANMSYNw1JZRJrJ2hUzL3SiZWkBPd"
+    ReCaptcha c = ReCaptchaFactory.newSecureReCaptcha("6LcNwj4UAAAAANMSYNw1JZRJrJ2hUzL3SiZWkBPd"
                                        ,"6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1", false);
     out.print(c.createRecaptchaHtml(null, null));
      %>   
