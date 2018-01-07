@@ -47,8 +47,8 @@ public class compra extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
-        
-            /* TODO output your page here. You may use following sample code. */
+         try (PrintWriter out = response.getWriter()) {
+         
              String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
         String cedula = request.getParameter("cedula");
@@ -86,25 +86,32 @@ public class compra extends HttpServlet {
                 System.out.println("user "+user);
                 DAOCliente DAO = new DAOCliente();
                 Cliente cliente = DAO.buscarCuenta(user);
+                String pregunta = cliente.getPreguntaSecreta();
             
-                request.setAttribute("pregunta", cliente.getPreguntaSecreta());
-                request.setAttribute("cedula", cedula);
-                request.setAttribute("tarjeta", tarjeta);
-                request.setAttribute("mes", mes);
-                request.setAttribute("year", year);
-                request.setAttribute("nseguridad", nseguridad);
-                request.setAttribute("nombre", nombre);
-                request.setAttribute("apellido", apellido);
-                request.setAttribute("precio", precio);
-                request.setAttribute("nombreP", nombreProducto);
-                request.setAttribute("auxiliar", auxiliarPrecio);
-                request.setAttribute("cantidad", cantidad);
-                request.setAttribute("user", user);
+               EnvioBancoCliente evc = new EnvioBancoCliente();
                 
-                request.getRequestDispatcher("verificarCompra.jsp").forward(request, response);               
+                    String mensaje = cedula+";"+toHash(tarjeta)+";"+toHash(mes)+";"+toHash(year)+";"
+                      +toHash(nseguridad)+";"+nombre+";"+apellido+";"+precio.toString()+";"+pregunta+";";
+
+                     System.out.println("mensaje "+mensaje);
+
+                   //ENVIO DATOS AL BANCO CLIENTE
+                    String mensajeDelServer = evc.enviarABancoCliente(mensaje);
+
+                    if(mensajeDelServer.equals("ACEPTADO")){
+                        //DESCOMENTAR PARA PROBAR CONEXION COMPLETA
+                        new HiloPrincipalServidor(response,request).recibir(nombre+" "+apellido,
+                                cedula,nombreProducto,cantidad,auxiliarPrecio,
+                                precio.toString(),user);
+                    }else{
+                        request.setAttribute("precio", auxiliarPrecio);
+                        request.setAttribute("nombreP", nombreProducto);
+                        request.setAttribute("user", user);
+                        request.getRequestDispatcher("datosIncorrectos.jsp").forward(request, response);
+                    }              
                 
             }else{
-                System.out.println("El capcha no es correcto");
+                System.out.println("El captcha no es correcto");
                 response.sendRedirect("Compra.jsp");
             }
             
@@ -113,6 +120,27 @@ public class compra extends HttpServlet {
                 response.sendRedirect("Compra.jsp");
             }
            
+    }   catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyStoreException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CertificateException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnrecoverableKeyException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (KeyManagementException ex) {
+            Logger.getLogger(compra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      /**
+     * metodo que se encarga de convertir a hash la clave ingresada por el usuario.
+     * @param clave clave a convertir.
+     * @return la clave convertida.
+     */
+    private Integer toHash(String clave){
+        Integer hash = 512;
+        hash =  37*hash + clave.hashCode();
+        return hash;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
