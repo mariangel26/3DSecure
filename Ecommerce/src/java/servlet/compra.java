@@ -66,18 +66,10 @@ public class compra extends HttpServlet {
         //MULTIPLICACION DE LA CANTIDAD
             precio = (auxiliarCantidad * precio);
         
-        //SE VERIFICA EL CAPTCHA
-        String remoteAddr = request.getRemoteAddr();
-        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-        reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
 
-        String challenge = request.getParameter("recaptcha_challenge_field");
-        String uresponse = request.getParameter("recaptcha_response_field");
-        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-        if((cantidad!="")&&(nombre != "")&&(apellido != "")&&(cedula != "")&&
-            (tarjeta != "")&&(nseguridad != "")&&(fecha != "")){
-            if((reCaptchaResponse.isValid())){
+        if(( !"".equals(cantidad))&&(!"".equals(nombre))&&(!"".equals(apellido))&&(!"".equals(cedula))&&
+            (!"".equals(tarjeta))&&(!"".equals(nseguridad))&&(!"".equals(fecha))){
+            if(captchaCorrecto(request)){
                    
                 String mes, year;
                 String[] split = fecha.split("-");
@@ -142,6 +134,31 @@ public class compra extends HttpServlet {
         Integer hash = 512;
         hash =  37*hash + clave.hashCode();
         return hash;
+    }
+    
+    /**
+     * metodo que se encarga de verificar si el capcha ingresado por el usuario 
+     * es correcto.
+     * @param request
+     * @return true si coincide, false en caso contrario.
+     */
+     public Boolean captchaCorrecto(HttpServletRequest request){
+        Boolean respuesta = true;
+        String remoteAddr = request.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LcNwj4UAAAAAAb5k0Ynq0N4b7KI56LNl5kcrmj1");
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+       if (reCaptchaResponse.isValid()) {
+           respuesta = true;
+        } else {
+           System.out.println("el capcha es incorrecto");
+           respuesta = false;
+        }
+        return respuesta;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
