@@ -54,12 +54,21 @@ public class HiloProcesaServidor extends Thread {
                         salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
                 System.out.println("voy a procesar los datos");
                     if(datosCorrectos(mensaje)){
-                       // if(HiloProcesaServidor.confirmarCliente(mensaje.split("")[7])){
+                        
+                        
+                        String respuestaCliente = HiloProcesaServidor.confirmarCliente(mensaje.split("")[8]);
                         System.out.println("Esto esta dentro del if de datos correctos");
-                            salidaObjeto.writeObject("ACEPTADO");
-                            HiloProcesaServidor.enviarABancoVendedor(mensaje);
+                            salidaObjeto.writeObject(respuestaCliente);
                             
-                        /*}else{
+                            ois = new ObjectInputStream(clientSocket.getInputStream());
+                            mensaje = (String)ois.readObject();
+                            //creo que aqui iria si el banco vendedor envia correcto
+                            if(mensaje.equals("ACEPTADO")){
+                                HiloProcesaServidor.enviarABancoVendedor(mensaje);
+                            }
+                            
+                         /*   
+                        }else{
                             salidaObjeto.writeObject("RECHAZADO");
                         }*/
                     }else{
@@ -129,9 +138,9 @@ public class HiloProcesaServidor extends Thread {
         
     }
     
-    public static boolean confirmarCliente(String mensaje) throws NoSuchAlgorithmException, KeyStoreException,
+    public static String confirmarCliente(String mensaje) throws NoSuchAlgorithmException, KeyStoreException,
             CertificateException, UnrecoverableKeyException, KeyManagementException{
-        boolean respuesta = true;
+        String respuesta = "";
         try {
             
             String[] split = mensaje.split(";");
@@ -168,12 +177,8 @@ public class HiloProcesaServidor extends Thread {
             ObjectInputStream ois = new ObjectInputStream(client.getInputStream());
             //ObjectOutputStream salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream()); 
             //Mensaje que llega:
-            String recibo = (String)ois.readObject();
-            if(recibo.equals("ACEPTADO")){
-                respuesta = true;
-            }else{
-                respuesta = false;
-            }
+            respuesta = (String) ois.readObject();
+            //System.out.println("La respuesta que llego es: "+ respuesta);
             salidaObjeto.close();
             client.close();
         } catch (IOException ex) {

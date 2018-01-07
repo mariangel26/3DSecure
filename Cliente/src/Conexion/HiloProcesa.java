@@ -48,11 +48,8 @@ public class HiloProcesa extends Thread {
 
                 salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
                 System.out.println("voy a procesar los datos");
-                if(Confirmar(mensaje)){
-                    salidaObjeto.writeObject("ACEPTADO");
-                }else{
-                    salidaObjeto.writeObject("RECHAZADO");
-                }  
+                
+                salidaObjeto.writeObject(escribirRespuesta(mensaje)); 
                 clientSocket.close();
                 //HiloProcesa.enviarAeCommerce(split[0]);
             
@@ -103,33 +100,18 @@ public class HiloProcesa extends Thread {
         
     }*/
     
-    public static boolean Confirmar(String monto){
+    public static String escribirRespuesta(String pregunta){
         boolean salir = true;
         boolean respuesta = true;
-        System.out.println ("Se va a realizar una transferencia en la tienda SoAwesome con el monto "+monto+"\n"
-                + "que desea hacer? reponda con un numero\n"
-                + "1: Aceptar la transferencia\n"
-                + "2: Rechazar la transferencia \n");
-        while(salir){
+        System.out.println ("Para continuar con la transaccion debe responder su pregunta secreta: \n"+pregunta+"\n");
+        
             String entradaTeclado = "";
             Scanner entradaEscaner = new Scanner (System.in); //Creación de un objeto Scanner
             entradaTeclado = entradaEscaner.nextLine (); //Invocamos un método sobre un objeto Scanner
-            if(entradaTeclado.equals("1")){
-                HiloProcesa.pintarCandadoAbierto();
-                respuesta = true;
-                salir = false;
-            }else if(entradaTeclado.equals("2")){
-                HiloProcesa.pintarCandadoCerrado();
-                respuesta = false;
-                salir = false;
-            }else{
-                System.out.println("Numero equivocado\n "
-                    + "1: Aceptar la transferencia\n"
-                    + "2: Rechazar la transferencia \n");
-            }
-        }
+            
         
-        return respuesta;
+        
+        return entradaTeclado;
     }
     
     
