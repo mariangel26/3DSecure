@@ -29,7 +29,7 @@ public class EnvioBancoCliente {
     
     public EnvioBancoCliente(){}
     
-    public String enviarABancoCliente(String mensaje) throws ClassNotFoundException, NoSuchAlgorithmException,
+    public String enviarABancoCliente(String mensaje, String respuesta) throws ClassNotFoundException, NoSuchAlgorithmException,
            KeyStoreException, CertificateException, UnrecoverableKeyException, KeyManagementException{
         
         try {
@@ -70,6 +70,12 @@ public class EnvioBancoCliente {
             //Mensaje que llega:
              String mensajeDelServer = (String)ois.readObject();
             
+             if (respuesta.equals(mensajeDelServer)){
+                 mensajeDelServer = "ACEPTADO";
+             }else{
+                 mensajeDelServer = "RECHAZADO";
+             }
+             salidaObjeto.writeObject(mensajeDelServer);
              client.close();
              
              return mensajeDelServer;
@@ -80,5 +86,7 @@ public class EnvioBancoCliente {
         }
         return null;
     }
+    
+    
     
 }

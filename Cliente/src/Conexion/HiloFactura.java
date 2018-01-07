@@ -27,11 +27,6 @@ import java.util.logging.Logger;
  */
 public class HiloFactura extends Thread{
 
-    Socket clienteSocket;
-
-    public HiloFactura(Socket clienteSocket) {
-        this.clienteSocket = clienteSocket;
-    }
     
     
     
@@ -51,6 +46,7 @@ public class HiloFactura extends Thread{
             //Servidor Socket en el puerto 5000
             //AQUI IRIA LAS COSAS PARA EL SOCKET SEGURO
             serverSocket = new ServerSocket( Registro.PUERTO_CONEXION_SERVIDOR_FACTURA );
+            System.out.println("la transferencia de la factura va a comenzar");
             while ( true ) {
                 //Aceptar conexiones
                 clientSocket = serverSocket.accept();

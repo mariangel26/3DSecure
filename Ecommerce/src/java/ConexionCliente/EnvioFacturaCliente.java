@@ -5,6 +5,7 @@
  */
 package ConexionCliente;
 
+import Registro.Registro;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -33,8 +34,8 @@ public class EnvioFacturaCliente extends Thread{
         //Fichero a transferir
 
         try{
-            final File localFile = new File( ubicacionFactura );
-            Socket clientSocket = new Socket("localhost", 5000);
+            final File localFile = new File( Registro.UBICACION_ARCHIVO_FACTURAS+ ubicacionFactura );
+            Socket clientSocket = new Socket("localhost", Registro.PUERTO_CONEXION_CLIENTE_FACTURA );
             bis = new BufferedInputStream(new FileInputStream(localFile));
             bos = new BufferedOutputStream(clientSocket.getOutputStream());
             //Enviamos el nombre del fichero

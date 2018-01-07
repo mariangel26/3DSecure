@@ -5,6 +5,7 @@
  */
 package cliente;
 
+import Conexion.HiloFactura;
 import Conexion.HiloPrincipal;
 
 /**
@@ -19,6 +20,7 @@ public class Cliente {
     public static void main(String[] args) {
         // TODO code application logic here
         new HiloPrincipal().start();
+        new HiloFactura().start();
     }
     
     

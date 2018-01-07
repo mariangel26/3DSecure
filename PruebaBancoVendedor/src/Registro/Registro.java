@@ -13,6 +13,8 @@ public class Registro {
     //DATOS PARA EL XML
         public static final String UBICACION_XML_VENDEDOR = "src/XML/Vendedor.xml";
         //public static final String UBICACION_XML_VENDEDOR = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoVendedor\\src\\XML\\Vendedor.xml";
+        //public static final String UBICACION_XML_VENDEDOR = "/home/oswalm/Documentos/repositorios/3DSecure/PruebaBancoVendedor/src/XML/Vendedor.xml";
+        //public static final String UBICACION_XML_VENDEDOR = "C:\\Users\\maria\\Documents\\Seguridad\\3DSecure\\3DSecure\\PruebaBancoVendedor\\src\\XML\\Vendedor.xml";
 
     
     //DATOS PARA SOCKET

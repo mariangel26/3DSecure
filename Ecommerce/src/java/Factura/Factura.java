@@ -36,12 +36,12 @@ public class Factura {
                     + "CLIENTE: "+nombreApellido+"        \n"
                     + "CEDULA: "+cedula+"                  \n"
                     + "__________________________________\n"
-                    + cantidad +"  " +nombreProducto +"               "+ precioDetal+"\n"
+                    + cantidad +"  " +nombreProducto +"           "+ precioDetal+"\n"
                     + "__________________________________\n"
-                    + "                       "+precioTotal);
+                    + "                              "+precioTotal);
         }
         bw.close();
-        return ruta;
+        return fechaActual+".txt";
     }
     
     public static String obtenerFecha(){
