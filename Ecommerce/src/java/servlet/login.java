@@ -102,7 +102,6 @@ public class login extends HttpServlet {
 
                 request.setAttribute("user", cliente.getNombreUsuario());
                 request.getRequestDispatcher("welcome.jsp").forward(request, response);
-                response.sendRedirect("welcome.jsp");
             }else{
                 response.sendRedirect("index.jsp");
             }

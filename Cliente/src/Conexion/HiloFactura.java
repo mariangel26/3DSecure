@@ -71,7 +71,7 @@ public class HiloFactura extends Thread{
             SSLServerSocketFactory serverFactory = context.getServerSocketFactory();
             
             //CREANDO EL SERVER SOCKET CON EL PUERTO DE CONEXION
-            ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR);
+            ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR_FACTURA);
             
             ((SSLServerSocket) serverSocket).setNeedClientAuth(false);
             System.out.println("la transferencia de la factura va a comenzar");
@@ -94,7 +94,7 @@ public class HiloFactura extends Thread{
                 System.out.println("Se ha terminado la recepcion del archivo");
                 bos.close();
                 dis.close();
-                serverSocket.close();
+                //serverSocket.close();
                 clientSocket.close();
                 
             }

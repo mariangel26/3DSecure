@@ -47,10 +47,9 @@ public class HiloProcesa extends Thread {
                 clientSocket.close();
                 String[] split = mensaje.split(";");
                 if(split[0].equals("ACEPTADO")){
-                    actualizarDineroVendedor(Long.parseLong(split[1]));
-                    HiloProcesa.enviarAeCommerce(split[0]);
+                    actualizarDineroVendedor(Long.parseLong(split[1]));   
                 }
-                //HiloProcesa.enviarAeCommerce(split[0]);
+                HiloProcesa.enviarAeCommerce(split[0]);
             
                 
         } catch (Exception ex) {
