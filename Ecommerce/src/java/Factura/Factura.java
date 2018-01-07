@@ -19,7 +19,7 @@ import java.util.Calendar;
  */
 public class Factura {
     
-    public static void generar(String nombreApellido,String cedula,String nombreProducto, String cantidad, 
+    public static String generar(String nombreApellido,String cedula,String nombreProducto, String cantidad, 
             String precioDetal,String precioTotal) throws IOException{
         String fechaActual = Factura.obtenerFecha();
         String ruta = Registro.UBICACION_ARCHIVO_FACTURAS+fechaActual+".txt";//el nombre de la factura tendra fecha y hora
@@ -41,6 +41,7 @@ public class Factura {
                     + "                       "+precioTotal);
         }
         bw.close();
+        return ruta;
     }
     
     public static String obtenerFecha(){

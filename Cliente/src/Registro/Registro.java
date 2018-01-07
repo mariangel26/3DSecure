@@ -15,6 +15,7 @@ public class Registro {
 
     
     //DATOS PARA SOCKET
+       public static final Integer PUERTO_CONEXION_SERVIDOR_FACTURA = 10000; 
     public static final Integer PUERTO_CONEXION_SERVIDOR = 6000;
     
     public static final Integer PUERTO_CONEXION_CLIENTE = 5000;

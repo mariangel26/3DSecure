@@ -5,6 +5,7 @@
  */
 package ConexionServidor;
 
+import ConexionCliente.EnvioFacturaCliente;
 import Factura.Factura;
 import Registro.Registro;
 import java.io.FileInputStream;
@@ -94,7 +95,12 @@ public class HiloPrincipalServidor extends Thread{
            //Mensaje que llega:
             String mensaje = (String)ois.readObject();
             if(mensaje.equals("ACEPTADO")){
-                Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
+                String ubicacionFactura = Factura.generar(nombreApellido,cedula,nombreProducto,cantidad,precioDetal,precioTotal);
+                
+                
+                new EnvioFacturaCliente(ubicacionFactura).start();
+                
+                
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("CompraExitosa.jsp").forward(request, response);
 
