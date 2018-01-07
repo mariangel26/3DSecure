@@ -160,17 +160,27 @@ public class login extends HttpServlet {
         Boolean respuesta = true;
         DAOCliente DAO = new DAOCliente();
         Cliente cliente = DAO.buscarCuenta(user);
-        if(cliente.getIntentos() < 3){
-            respuesta = true;
+        if(cliente != null){
+            if(cliente.getIntentos() < 3){
+                respuesta = true;
+            }else{
+                System.out.println("El usuario tiene la cuenta bloqueada");
+                respuesta = false;
+                try {
+                    response.sendRedirect("CuentaBloqueada.jsp");
+                } catch (IOException ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }else{
-            System.out.println("El usuario tiene la cuenta bloqueada");
-            respuesta = false;
             try {
-                response.sendRedirect("CuentaBloqueada.jsp");
+                respuesta = false;
+                    response.sendRedirect("index.jsp");
             } catch (IOException ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
         return respuesta;
     }
     /**
