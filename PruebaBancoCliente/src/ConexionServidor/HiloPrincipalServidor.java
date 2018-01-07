@@ -33,7 +33,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 public class HiloPrincipalServidor extends Thread{
     
     public void run(){
-        System.out.println("VENDEDOR COMO Servidor empieza a correr");
+        System.out.println("BANCO CLIENTE COMO Servidor empieza a correr");
         try {
             System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
             

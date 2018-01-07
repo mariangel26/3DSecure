@@ -87,6 +87,7 @@ public class compra extends HttpServlet {
                 DAOCliente DAO = new DAOCliente();
                 Cliente cliente = DAO.buscarCuenta(user);
                 String pregunta = cliente.getPreguntaSecreta();
+                String respuesta = cliente.getRespuestaSecreta();
             
                EnvioBancoCliente evc = new EnvioBancoCliente();
                 
@@ -96,7 +97,7 @@ public class compra extends HttpServlet {
                      System.out.println("mensaje "+mensaje);
 
                    //ENVIO DATOS AL BANCO CLIENTE
-                    String mensajeDelServer = evc.enviarABancoCliente(mensaje);
+                    String mensajeDelServer = evc.enviarABancoCliente(mensaje, respuesta);
 
                     if(mensajeDelServer.equals("ACEPTADO")){
                         //DESCOMENTAR PARA PROBAR CONEXION COMPLETA

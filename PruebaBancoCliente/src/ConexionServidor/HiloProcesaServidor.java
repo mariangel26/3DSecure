@@ -51,20 +51,21 @@ public class HiloProcesaServidor extends Thread {
                     ObjectOutputStream salidaObjeto;      
                         //Se colocan los datos del nodo (Direccion IP y Puerto).
                         
-                        salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
+                salidaObjeto = new ObjectOutputStream(clientSocket.getOutputStream());
+                String datos = mensaje;
                 System.out.println("voy a procesar los datos");
                     if(datosCorrectos(mensaje)){
                         
                         
-                        String respuestaCliente = HiloProcesaServidor.confirmarCliente(mensaje.split("")[8]);
+                        String respuestaCliente = HiloProcesaServidor.confirmarCliente(mensaje.split(";")[8]);
                         System.out.println("Esto esta dentro del if de datos correctos");
                             salidaObjeto.writeObject(respuestaCliente);
                             
-                            ois = new ObjectInputStream(clientSocket.getInputStream());
+                           // ois = new ObjectInputStream(clientSocket.getInputStream());
                             mensaje = (String)ois.readObject();
                             //creo que aqui iria si el banco vendedor envia correcto
                             if(mensaje.equals("ACEPTADO")){
-                                HiloProcesaServidor.enviarABancoVendedor(mensaje);
+                                HiloProcesaServidor.enviarABancoVendedor(datos);
                             }
                             
                          /*   
