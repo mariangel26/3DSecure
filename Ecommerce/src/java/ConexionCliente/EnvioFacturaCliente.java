@@ -15,6 +15,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.KeyStore;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  *
@@ -34,8 +38,32 @@ public class EnvioFacturaCliente extends Thread{
         //Fichero a transferir
 
         try{
+             System.setProperty("javax.net.ssl.trustStore", Registro.TRUST_STORE_CLIENTE);
+            
+            //ESCOJO EL PROTOCOLO QUE SE VA A UTILIZAR
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            
+            //TIPO DE KEYSTORE
+            KeyStore ks = KeyStore.getInstance("jceks");
+
+            //CARGANDO EL KEYSTORE DEL SERVIDOR
+            ks.load(new FileInputStream(Registro.KEY_STORE_SERVIDOR), null);
+            
+            //ESTABLECIENDO EL TIPO DE CERTIFICADO
+            KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+            kf.init(ks, Registro.KEY_STORE_PASSWORD.toCharArray());
+            
+            //INICIALIZA EL CONTEXTO
+            context.init(kf.getKeyManagers(), null, null);
+            
+            //INICIALIZANDO LA FABRICA PARA EL SOCKET
+            SSLSocketFactory clientFactory = context.getSocketFactory();
+            
+            //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
+            Socket clientSocket;
+            clientSocket = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE_FACTURA);
             final File localFile = new File( Registro.UBICACION_ARCHIVO_FACTURAS+ ubicacionFactura );
-            Socket clientSocket = new Socket("localhost", Registro.PUERTO_CONEXION_CLIENTE_FACTURA );
+          
             bis = new BufferedInputStream(new FileInputStream(localFile));
             bos = new BufferedOutputStream(clientSocket.getOutputStream());
             //Enviamos el nombre del fichero

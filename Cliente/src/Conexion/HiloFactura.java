@@ -12,14 +12,20 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.security.KeyStore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
 
 /**
  *
@@ -31,7 +37,6 @@ public class HiloFactura extends Thread{
     
     
     public void run(){
-        ServerSocket serverSocket;
         Socket clientSocket;
 
         DataOutputStream output;
@@ -44,8 +49,31 @@ public class HiloFactura extends Thread{
 
         try{
             //Servidor Socket en el puerto 5000
-            //AQUI IRIA LAS COSAS PARA EL SOCKET SEGURO
-            serverSocket = new ServerSocket( Registro.PUERTO_CONEXION_SERVIDOR_FACTURA );
+           System.setProperty("javax.net.ssl.keyStore", Registro.KEY_STORE_SERVIDOR);
+            
+            //ESCOJO EL PROTOCOLO QUE SE VA A UTILIZAR
+            SSLContext context = SSLContext.getInstance("TLSv1.2");
+            
+            //TIPO DE KEYSTORE
+            KeyStore ks = KeyStore.getInstance("jceks");
+            
+            //CARGANDO EL KEYSTORE DEL SERVIDOR
+            ks.load(new FileInputStream(Registro.KEY_STORE_SERVIDOR), null);
+            
+            //ESTABLECIENDO EL TIPO DE CERTIFICADO
+            KeyManagerFactory kf = KeyManagerFactory.getInstance("SunX509");
+            kf.init(ks, Registro.KEY_STORE_PASSWORD.toCharArray());
+           
+            //INICIALIZA EL CONTEXTO 
+            context.init(kf.getKeyManagers(), null, null);
+            
+            //INICIALIZANDO LA FABRICA PARA EL SERVER SOCKET
+            SSLServerSocketFactory serverFactory = context.getServerSocketFactory();
+            
+            //CREANDO EL SERVER SOCKET CON EL PUERTO DE CONEXION
+            ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR);
+            
+            ((SSLServerSocket) serverSocket).setNeedClientAuth(false);
             System.out.println("la transferencia de la factura va a comenzar");
             while ( true ) {
                 //Aceptar conexiones
