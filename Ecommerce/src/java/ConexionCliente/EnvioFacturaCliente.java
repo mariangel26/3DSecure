@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.KeyStore;
+import javax.net.SocketFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -57,7 +58,7 @@ public class EnvioFacturaCliente extends Thread{
             context.init(kf.getKeyManagers(), null, null);
             
             //INICIALIZANDO LA FABRICA PARA EL SOCKET
-            SSLSocketFactory clientFactory = context.getSocketFactory();
+            SocketFactory clientFactory = context.getSocketFactory();
             
             //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
             Socket clientSocket;

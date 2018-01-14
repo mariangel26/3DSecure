@@ -22,6 +22,7 @@ import java.net.Socket;
 import java.security.KeyStore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ServerSocketFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLServerSocket;
@@ -68,7 +69,7 @@ public class HiloFactura extends Thread{
             context.init(kf.getKeyManagers(), null, null);
             
             //INICIALIZANDO LA FABRICA PARA EL SERVER SOCKET
-            SSLServerSocketFactory serverFactory = context.getServerSocketFactory();
+            ServerSocketFactory serverFactory = context.getServerSocketFactory();
             
             //CREANDO EL SERVER SOCKET CON EL PUERTO DE CONEXION
             ServerSocket serverSocket = serverFactory.createServerSocket(Registro.PUERTO_CONEXION_SERVIDOR_FACTURA);
