@@ -16,6 +16,7 @@ import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.SocketFactory;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -117,7 +118,7 @@ public class HiloProcesaServidor extends Thread {
             context.init(kf.getKeyManagers(), null, null);
             
             //INICIALIZANDO LA FABRICA PARA EL SOCKET
-            SSLSocketFactory clientFactory = context.getSocketFactory();
+            SocketFactory clientFactory = context.getSocketFactory();
             
             //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
             Socket client;
@@ -164,11 +165,11 @@ public class HiloProcesaServidor extends Thread {
             context.init(kf.getKeyManagers(), null, null);
             
             //INICIALIZANDO LA FABRICA PARA EL SOCKET
-            SSLSocketFactory clientFactory = context.getSocketFactory();
+            SocketFactory clientFactory = context.getSocketFactory();
             
             //CREANDO EL SOCKET Y ENVIANDO IP Y PUERTO DE CONEXION
             Socket client;
-            client = clientFactory.createSocket(Registro.IP_CONEXION, Registro.PUERTO_CONEXION_CLIENTE_CLIENTE);
+            client = clientFactory.createSocket(Registro.IP_CONEXION_CLIENTE, Registro.PUERTO_CONEXION_CLIENTE_CLIENTE);
             
             ObjectOutputStream salidaObjeto;      
             //Se colocan los datos del nodo (Direccion IP y Puerto).

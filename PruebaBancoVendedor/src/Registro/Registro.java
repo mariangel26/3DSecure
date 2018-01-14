@@ -21,7 +21,7 @@ public class Registro {
     public static final Integer PUERTO_CONEXION_SERVIDOR = 4000;
     
     public static final Integer PUERTO_CONEXION_CLIENTE = 5000;
-    public static final String IP_CONEXION = "localhost";
+    public static final String IP_CONEXION = "192.168.1.9";
     //DATOS PARA SSL
     public static final String KEY_STORE_SERVIDOR = "bancovendedor.store";    
 
